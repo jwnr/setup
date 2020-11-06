@@ -19,4 +19,4 @@ rm /etc/fonts/conf.d/70-yes-bitmaps.conf; ln -s /etc/fonts/conf.avail/70-no-bitm
 #=== files
 #==================================
 cd /root; git clone https://github.com/j-wanner/setup.git;
-cp -r HackGen /usr/share/fonts/;
+cp -r setup/HackGen /usr/share/fonts/;
