@@ -1,4 +1,4 @@
-# Linux(Manjaro i3) setup
+### Linux(Manjaro i3) setup
 ```
 curl -sL {URL} | sh
 ```
