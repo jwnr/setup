@@ -10,7 +10,7 @@ pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman -Syyu
 sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen;
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf;
 
-#=== packs    dbus...?
+#=== packs
 #==================================
 pacman -S yay git --noconfirm
 pacman -S fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
