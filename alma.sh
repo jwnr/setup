@@ -23,7 +23,7 @@ sed -i -e '/PubkeyAuthentication/d' /etc/ssh/sshd_config
 sed -i -e '/PermitEmptyPasswords/d' /etc/ssh/sshd_config
 sed -i -e '/PasswordAuthentication/d' /etc/ssh/sshd_config
 sed -i -e '/AuthorizedKeysFile/d' /etc/ssh/sshd_config
-echo -e \\nPort $1\\nProtocol 2\\nPermitRootLogin without-password\\nPubkeyAuthentication yes\\nPermitEmptyPasswords no\\nPasswordAuthentication no\\nAuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
-firewall-cmd --add-port=$1/tcp --permanent
+echo -e \\nPort 57031\\nProtocol 2\\nPermitRootLogin without-password\\nPubkeyAuthentication yes\\nPermitEmptyPasswords no\\nPasswordAuthentication no\\nAuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
+firewall-cmd --add-port=57031/tcp --permanent
 
 echo '===== command succeeded ====='
