@@ -1,4 +1,4 @@
 
 ```
-curl -sL {URL} | sh
+sudo curl -sL {URL} | sh
 ```
