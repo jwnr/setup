@@ -5,7 +5,7 @@ echo -e "==== command starting ==========================\n- optimize mirror pri
 #=== mirror config
 #==================================
 #sed -i -e '/^Method.*/d' /etc/pacman-mirrors.conf; sed -i -e '/^OnlyCountry.*/d' /etc/pacman-mirrors.conf;echo -e \\nMethod = rank\\nOnlyCountry = Japan >> /etc/pacman-mirrors.conf
-pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman -Syyu
+pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman --noconfirm -Syyu
 #pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman -Syy
 
 #=== locale
