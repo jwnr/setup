@@ -1,4 +1,7 @@
 
 ```
-sudo curl -sL {URL} | sh
+su
+curl -sL {URL} | sh
+
+※sudoじゃダメ
 ```
