@@ -15,6 +15,6 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 
 #=== packs
 #==================================
-pacman -S git rxvt-unicode fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
+pacman -S git rxvt-unicode rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
 
-echo -e "\n==== command succeeded =========================\n + optimize mirror priority\n + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, fcitx)\n + install font font (install IPA)\n================================================\n"
+echo -e "\n==== command succeeded =========================\n + optimize mirror priority\n + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, rofi, fcitx)\n + install font font (install IPA)\n================================================\n"
