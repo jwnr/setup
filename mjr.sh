@@ -4,8 +4,8 @@ echo -e "\n================================================\n==== command start 
 read -p "upgrade all local packages ? ( y / n )  " x
 echo -e "==== started ===============================================\n"
 
-#=== mirror config
-#==================================
+# ==== mirror config
+# ==================================
 pacman-mirrors --country Japan,Taiwan,India,Singapore
 
 if [ $x = 'y' ]; then
@@ -14,13 +14,13 @@ else
   pacman --noconfirm -Syy
 fi
 
-#=== locale
-#==================================
+# ==== locale
+# ==================================
 sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
 
-#=== packs
-#==================================
+# ==== packs
+# ==================================
 pacman -S git rxvt-unicode dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
 
 echo -e "\n==== succeeded =============================================\n"
