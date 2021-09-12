@@ -1,12 +1,19 @@
 #!/bin/bash
 
 echo -e "\n================================================\n==== command start =============================\n================================================\n"
+echo "upgrade all packages ? ( y / n )"
+read x
+echo -e "==== started ===============================================\n"
 
 #=== mirror config
 #==================================
-#sed -i -e '/^Method.*/d' /etc/pacman-mirrors.conf; sed -i -e '/^OnlyCountry.*/d' /etc/pacman-mirrors.conf;echo -e \\nMethod = rank\\nOnlyCountry = Japan >> /etc/pacman-mirrors.conf
-pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman --noconfirm -Syyu
-#pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman -Syy
+pacman-mirrors --country Japan,Taiwan,India,Singapore
+
+if [ $x = 'y' ]; then
+  pacman --noconfirm -Syyu
+else
+  pacman --noconfirm -Syy
+fi
 
 #=== locale
 #==================================
@@ -17,4 +24,10 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 #==================================
 pacman -S git rxvt-unicode dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
 
-echo -e "\n==== command succeeded =========================\n + optimize mirror priority\n + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, dolphin, rofi, fcitx)\n + install font font (install IPA)\n================================================\n"
+echo -e "\n==== succeeded =============================================\n"
+echo -e " + optimize mirror priority\n"
+if [ $x = 'y' ]; then
+  echo -e " + upgrade all packages\n"
+fi
+echo -e " + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, dolphin, rofi, fcitx)\n + install font font (install IPA)\n"
+echo -e "============================================================\n"
