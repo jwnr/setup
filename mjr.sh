@@ -8,13 +8,6 @@ echo -e "\n================================================\n==== command start 
 pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman --noconfirm -Syyu
 #pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman -Syy
 
-#=== pacman
-#==================================
-sed -i -e '/^Color.*$/d' /etc/pacman.conf
-sed -i -e '/^ILoveCandy.*$/d' /etc/pacman.conf
-sed -i -e '/^ParallelDownloads.*$/d' /etc/pacman.conf
-echo -e \\n\\nColor\\nILoveCandy\\nParallelDownloads = 4 >> /etc/pacman.conf
-
 #=== locale
 #==================================
 sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
