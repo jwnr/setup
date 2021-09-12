@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 echo -e "\n================================================\n==== command start =============================\n================================================"
-read -p "upgrade all local packages ? ( y / n )" x
+read -p "upgrade all local packages ? ( y / n )  " x
 echo -e "==== started ===============================================\n"
 
 #=== mirror config
@@ -26,7 +26,9 @@ pacman -S git rxvt-unicode dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-
 echo -e "\n==== succeeded =============================================\n"
 echo -e " + optimize mirror priority\n"
 if [ $x = 'y' ]; then
-  echo -e " + upgrade all packages\n"
+  echo -e " + sync package databases & upgrade local packages\n"
+else
+  echo -e " + sync package databases"
 fi
 echo -e " + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, dolphin, rofi, fcitx)\n + install font font (install IPA)\n"
 echo -e "============================================================\n"
