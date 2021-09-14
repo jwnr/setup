@@ -13,12 +13,10 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 
 # ==== packs
 # ==================================
-pacman -S --needed --noconfirm snapd git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont
-systemctl enable --now snapd.socket; ln -s /var/lib/snapd/snap /snap
-snap install --classic code
+pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont
 
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
-echo -e " + change locale (ja_JP.UTF-8)\n + install packages (snap, git, rxvt, vscode, vivaldi, dolphin, rofi, fcitx)\n + install font font (install IPA)"
+echo -e " + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, vivaldi, dolphin, rofi, fcitx)\n + install font font (install IPA)"
 echo -e "============================================================\n"
