@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "\n============================================================\n==== starting ==============================================\n============================================================\n"
+echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 
 # ==== mirror config
 # ==================================
@@ -18,7 +18,7 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 # ==================================
 pacman -S git rxvt-unicode dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont --noconfirm
 
-echo -e "\n==== succeeded =============================================\n"
-echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages\n"
-echo -e " + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, dolphin, rofi, fcitx)\n + install font font (install IPA)\n"
+echo -e "\n==== succeeded ============================================="
+echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
+echo -e " + change locale (ja_JP.UTF-8)\n + install packages (git, rxvt, dolphin, rofi, fcitx)\n + install font font (install IPA)"
 echo -e "============================================================\n"
