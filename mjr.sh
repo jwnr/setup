@@ -6,8 +6,7 @@ echo -e "\n============================================================\n==== st
 # ==================================
 pacman-mirrors --country Japan,Taiwan,India,Singapore
 
-# pacman --noconfirm -Syyu
-pacman --noconfirm -Syy
+pacman --noconfirm -Syyu
 
 # ==== locale
 # ==================================
