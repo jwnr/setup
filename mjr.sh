@@ -15,6 +15,7 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 # ==================================
 pacman -S --needed --noconfirm snapd git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 otf-ipaexfont
 systemctl enable --now snapd.socket; ln -s /var/lib/snapd/snap /snap
+snap install --classic codea
 
 
 echo -e "\n==== succeeded ============================================="
