@@ -4,9 +4,7 @@ echo -e "\n============================================================\n==== st
 
 # ==== mirror config
 # ==================================
-pacman-mirrors --country Japan,Taiwan,India,Singapore
-
-pacman --noconfirm -Syyu
+pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman --noconfirm -Syyu
 
 # ==== locale
 # ==================================
