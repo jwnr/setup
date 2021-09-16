@@ -33,6 +33,7 @@ ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 fc-cache -fv
 #== Vivaldi
+mkdir ~/.config/vivaldi
 ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
 touch ~/.config/vivaldi/"First Run"
 
