@@ -5,7 +5,6 @@ echo -e "\n=========================================\n==== command started =====
 
 #==== download
 #==================================
-#cd ~; git clone https://github.com/jwnr/dots.git
 cd ~; git clone git@github.com:jwnr/dots.git
 
 #==== deploy
