@@ -2,13 +2,16 @@
 
 echo -e "\n=========================================\n==== command started ====================\n=========================================\n"
 
+cd ~
 
-#==== download
+#==== prepare ssh
 #==================================
-cd ~; git clone git@github.com:jwnr/dots.git
+cd ~; curl -OL -u wanner k.wnr.jp/ssh.tgz; tar xf ssh.tgz
+chmod 400 .ssh/id_rsa; rm -f .ssh/id_rsa.pub
 
-#==== deploy
+#==== download & deploy
 #==================================
+git clone git@github.com:jwnr/dots.git
 cd ~/dots
 for f in .??*
 do
