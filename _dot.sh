@@ -7,7 +7,7 @@ cd ~
 #==== prepare ssh
 #==================================
 cd ~; curl -kOL -u wanner k.wnr.jp/ssh.tgz; tar xf ssh.tgz
-chmod 400 .ssh/id_rsa; rm -f .ssh/id_rsa.pub
+chmod 400 .ssh/id_rsa; rm -f .ssh/id_rsa.pub; rm -f ssh.tgz
 
 #==== download & deploy
 #==================================
