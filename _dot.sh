@@ -19,7 +19,7 @@ do
   [[ "$f" == ".gitignore" ]] && continue
   [[ "$f" == ".DS_Store" ]] && continue
   
-  ln -snfv ~/dots/"$f" ~/
+  ln -snf ~/dots/"$f" ~/
 done
 
 #== i3
