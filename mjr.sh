@@ -13,7 +13,7 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 
 # ==== fonts
 # ==================================
-pacman -Sq otf-ipaexfont --noconfirm
+pacman --noconfirm -S otf-ipaexfont
 ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 # ==== packs
