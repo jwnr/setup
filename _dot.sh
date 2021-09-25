@@ -40,8 +40,8 @@ fc-cache -fv
 #ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
 #touch ~/.config/vivaldi/"First Run"
 
-xrdb -remove
-xrdb -merge ~/.Xresources
+#xrdb -remove
+#xrdb -merge ~/.Xresources
 
 
 echo -e "\n==== command succeeded ==================\ninstall packages\n"
