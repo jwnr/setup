@@ -4,7 +4,7 @@ echo -e "\n============================================================\n==== st
 
 # ==== mirror config
 # ==================================
-pacman-mirrors --country Japan,Taiwan,India,Singapore && pacman --noconfirm -Syyu
+pacman-mirrors -c Japan,Taiwan,Singapore && pacman --noconfirm -Syyu
 
 # ==== locale
 # ==================================
@@ -13,13 +13,13 @@ sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.
 
 # ==== fonts
 # ==================================
-pacman -S otf-ipaexfont --noconfirm
+pacman -Sq otf-ipaexfont --noconfirm
 ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 # ==== packs
 # ==================================
-pacman -S git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3 --needed --noconfirm
-pamac build google-chrome google-chrome-beta visual-studio-code-bin --no-confirm
+pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3
+pamac build --no-confirm google-chrome google-chrome-beta visual-studio-code-bin
 pacman -Scc; pamac clean
 
 
