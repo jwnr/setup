@@ -39,10 +39,11 @@ fc-cache -fv
 #mkdir ~/.config/vivaldi
 #ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
 #touch ~/.config/vivaldi/"First Run"
-
+#== urxvt
 #xrdb -remove
 #xrdb -merge ~/.Xresources
-
+cp ~/dots/urxvt_run.sh ~/
+chmod 700 ~/urxvt_run.sh
 
 echo -e "\n==== command succeeded ==================\ninstall packages\n"
 echo -e "download & deploy dot files\n"
