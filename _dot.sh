@@ -29,7 +29,10 @@ ln -snf ~/dots/dir/.i3/config ~/.i3/config
 # ※profileはリンクが外れる
 mkdir -p ~/.config/fcitx
 ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
-ln -snf ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/profile
+#ln -snf ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/profile
+ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
+ln -snf ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/config1.db
+
 #== font
 cp -rf ~/dots/files/fonts ~/.local/share/
 mkdir -p ~/.config/fontconfig
