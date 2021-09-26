@@ -27,10 +27,11 @@ cp ~/.i3/config ~/.i3/config_bak
 ln -snf ~/dots/dir/.i3/config ~/.i3/config
 #== fcitx
 # ※profileはリンクが外れる
-mkdir -p ~/.config/fcitx
+mkdir -p ~/.config/fcitx/conf
 ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
 #ln -snf ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/profile
 ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
+mkdir -p ~/.config/mozc
 ln -snf ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/config1.db
 
 #== font
