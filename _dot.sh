@@ -26,6 +26,7 @@ done
 cp ~/.i3/config ~/.i3/config_bak
 ln -snf ~/dots/dir/.i3/config ~/.i3/config
 #== fcitx
+# ※profileはリンクが外れる
 mkdir -p ~/.config/fcitx
 ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
 ln -snf ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/profile
@@ -39,6 +40,7 @@ fc-cache -fv
 #ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
 #touch ~/.config/vivaldi/"First Run"
 #== urxvt
+# ※.Xresourcesはリンクが外れる
 #xrdb -remove
 #xrdb -merge ~/.Xresources
 cp ~/dots/urxvt_run.sh ~/
