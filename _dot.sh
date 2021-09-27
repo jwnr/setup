@@ -49,7 +49,7 @@ fc-cache -fv
 cp ~/dots/urxvt_run.sh ~/
 chmod 700 ~/urxvt_run.sh
 
-echo -e "\n==== command succeeded ========================\n+ install packages\n"
-echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)\n"
-echo -e "  │  ├ fontconfig/...   font config\n  │  └ mozc/...         input jp (mozc)\n  ├ .i3/...             i3wm\n  ├ .local/share/...    font files\n  └ urxvt_run.sh        terminal run script\n"
+echo -e "\n==== command succeeded ========================\n+ install packages"
+echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)"
+echo -e "  │  ├ fontconfig/...   font config\n  │  └ mozc/...         input jp (mozc)\n  ├ .i3/...             i3wm\n  ├ .local/share/...    font files\n  └ urxvt_run.sh        terminal run script"
 echo -e "\n        please reboot system\n===============================================\n"
