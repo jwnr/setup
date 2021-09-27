@@ -22,7 +22,7 @@ do
   ln -snf ~/dots/"$f" ~/
 done
 
-#== i3
+#== i3wm
 cp ~/.i3/config ~/.i3/config_bak
 ln -snf ~/dots/dir/.i3/config ~/.i3/config
 #== fcitx
@@ -49,7 +49,7 @@ fc-cache -fv
 cp ~/dots/urxvt_run.sh ~/
 chmod 700 ~/urxvt_run.sh
 
-echo -e "\n==== command succeeded ==================\ninstall packages\n"
-echo -e "download & deploy dot files\n"
-echo -e " ├ .Xmodmap            key customize\n ├ .Xresources         urxvt setting\n ├ .xprofile           for fcitx\n ├ .config/\n │  ├ fcitx/...        fcitx\n │  └ fontconfig/...   font\n └ .i3/...             i3\n"
-echo -e "\n     please reboot system\n=========================================\n"
+echo -e "\n==== command succeeded ========================\n+ install packages\n"
+echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)\n"
+echo -e "  │  ├ fontconfig/...   font config\n  │  └ mozc/...         input jp (mozc)\n  ├ .i3/...             i3wm\n  ├ .local/share/...    font files\n  └ urxvt_run.sh        terminal run script\n"
+echo -e "\n        please reboot system\n===============================================\n"
