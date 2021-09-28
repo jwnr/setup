@@ -49,7 +49,7 @@ mkdir -p ~/.config/pcmanfm/default
 cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
 #== Vivaldi
 mkdir -p ~/.config/vivaldi/Default
-ln -snf ~/dots/dir/.config/vivaldi/Default/Preferences ~/.config/vivaldi/Default/Preferences
+cp ~/dots/dir/.config/vivaldi/Default/Preferences ~/.config/vivaldi/Default/Preferences
 touch ~/.config/vivaldi/"First Run"
 
 echo -e "\n==== command succeeded ========================\n+ install packages"
