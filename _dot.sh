@@ -32,22 +32,25 @@ ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
 ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
 mkdir -p ~/.config/mozc
 cp ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/config1.db
-
 #== font
 cp -rf ~/dots/files/fonts ~/.local/share/
 mkdir -p ~/.config/fontconfig
 ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 fc-cache -fv
-#== Vivaldi
-#mkdir ~/.config/vivaldi
-#ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
-#touch ~/.config/vivaldi/"First Run"
 #== urxvt
 # ※.Xresourcesはリンクが外れる
 #xrdb -remove
 #xrdb -merge ~/.Xresources
 cp ~/dots/urxvt_run.sh ~/
 chmod 700 ~/urxvt_run.sh
+
+#== Pcmanfm
+mkdir -p ~/.config/pcmanfm/default
+cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
+#== Vivaldi
+#mkdir ~/.config/vivaldi
+#ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
+#touch ~/.config/vivaldi/"First Run"
 
 echo -e "\n==== command succeeded ========================\n+ install packages"
 echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)"
