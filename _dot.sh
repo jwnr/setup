@@ -38,21 +38,16 @@ mkdir -p ~/.config/fontconfig
 ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 fc-cache -fv
 #== urxvt
-# ※.Xresourcesはリンクが外れる
+# ※.Xresourcesだとリンクが外れる
 #xrdb -remove
 #xrdb -merge ~/.Xresources
 cp ~/dots/urxvt_run.sh ~/
 chmod 700 ~/urxvt_run.sh
-
 #== Pcmanfm
 mkdir -p ~/.config/pcmanfm/default
 cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
-#== Vivaldi
-mkdir -p ~/.config/vivaldi/Default
-cp ~/dots/dir/.config/vivaldi/Default/Preferences ~/.config/vivaldi/Default/Preferences
-touch ~/.config/vivaldi/"First Run"
 
-echo -e "\n==== command succeeded ========================\n+ install packages"
-echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)"
-echo -e "  │  ├ fontconfig/...   font config\n  │  └ mozc/...         input jp (mozc)\n  ├ .i3/...             i3wm\n  ├ .local/share/...    font files\n  └ urxvt_run.sh        terminal run script"
+echo -e "\n==== command succeeded ========================\n+ prepare ssh\n+ download & deploy dot files"
+echo -e "  ├ .config/\n  │  ├ fcitx/...\n  │  ├ fontconfig/...\n  │  ├ mozc/...\n  │  └ pcmanfm/...\n  ├ .i3/...\n  ├ .local/share/...    font files"
+echo -e "  ├ .Xmodmap            keymap\n  ├ .gitconfig\n  ├ .gitignore\n  ├ .xprofile           for fcitx\n  └ urxvt_run.sh        terminal run script"
 echo -e "\n        please reboot system\n===============================================\n"
