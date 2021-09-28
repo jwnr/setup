@@ -48,7 +48,7 @@ chmod 700 ~/urxvt_run.sh
 mkdir -p ~/.config/pcmanfm/default
 cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
 #== Vivaldi
-mkdir ~/.config/vivaldi/Default
+mkdir -p ~/.config/vivaldi/Default
 ln -snf ~/dots/dir/.config/vivaldi/Default/Preferences ~/.config/vivaldi/Default/Preferences
 touch ~/.config/vivaldi/"First Run"
 
