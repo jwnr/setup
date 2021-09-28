@@ -48,9 +48,9 @@ chmod 700 ~/urxvt_run.sh
 mkdir -p ~/.config/pcmanfm/default
 cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
 #== Vivaldi
-#mkdir ~/.config/vivaldi
-#ln -snf ~/dots/dir/.config/vivaldi/Default ~/.config/vivaldi/
-#touch ~/.config/vivaldi/"First Run"
+mkdir ~/.config/vivaldi/Default
+ln -snf ~/dots/dir/.config/vivaldi/Default/Preferences ~/.config/vivaldi/Default/Preferences
+touch ~/.config/vivaldi/"First Run"
 
 echo -e "\n==== command succeeded ========================\n+ install packages"
 echo -e "+ download & deploy dot files\n  ├ .Xmodmap            key customize\n  ├ .xprofile           for fcitx\n  ├ .config/\n  │  ├ fcitx/...        input jp (fcitx)"
