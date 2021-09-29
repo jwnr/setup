@@ -22,6 +22,10 @@ pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs do
 pamac build --no-confirm google-chrome google-chrome-beta visual-studio-code-bin
 pacman -Scc; pamac clean
 
+# ==== IME
+# ==================================
+chmod -R 777 /usr/share/fcitx/skin/default
+chmod -R 777 /usr/share/fcitx/mozc/icon
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
