@@ -32,6 +32,8 @@ ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
 ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
 mkdir -p ~/.config/mozc
 cp ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/config1.db
+cp ~/dots/files/fcitx/default/* /usr/share/fcitx/skin/default/
+cp ~/dots/files/fcitx/icon/* /usr/share/fcitx/mozc/icon/
 #== font
 cp -rf ~/dots/files/fonts ~/.local/share/
 mkdir -p ~/.config/fontconfig
