@@ -18,14 +18,14 @@ ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 # ==== packs
 # ==================================
-pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3
+pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
 pamac build --no-confirm google-chrome google-chrome-beta visual-studio-code-bin
 pacman -Scc; pamac clean
 
 # ==== IME
 # ==================================
-chmod -R 777 /usr/share/fcitx/skin/default
-chmod -R 777 /usr/share/fcitx/mozc/icon
+#chmod -R 777 /usr/share/fcitx/skin/default
+#chmod -R 777 /usr/share/fcitx/mozc/icon
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
