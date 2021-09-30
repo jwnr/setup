@@ -22,16 +22,10 @@ pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs do
 pamac build --no-confirm google-chrome google-chrome-beta visual-studio-code-bin
 pacman -Scc; pamac clean
 
-# ==== IME
-# ==================================
-#chmod -R 777 /usr/share/fcitx/skin/default
-#chmod -R 777 /usr/share/fcitx/mozc/icon
-
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
 echo -e " + change locale (ja_JP.UTF-8)"
-echo -e " + prepare font (install IPA, disable bitmap font)"
+echo -e " + prepare font (install IPAex, disable bitmap font)"
 echo -e " + install packages (by pacman)\n  - git, rxvt, Vivaldi, dolphin, rofi, fcitx"
 echo -e " + install packages (by pamac)\n  - GoogleChrome, GoogleChrome_beta, VisualStudioCode"
-#echo -e "## install VSCode (not root)\nmkdir ~/tmp; cd ~/tmp; git clone https://aur.archlinux.org/visual-studio-code-bin.git\ncd visual-studio-code-bin/; makepkg -csi\ncd ~; rm -rf tmp"
 echo -e "============================================================\n"
