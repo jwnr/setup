@@ -2,8 +2,6 @@
 
 echo -e "\n=========================================\n==== command started ====================\n=========================================\n"
 
-cd ~
-
 #==== prepare ssh
 #==================================
 cd ~; curl -kOL -u wanner k.wnr.jp/ssh.tgz; tar xf ssh.tgz
@@ -23,31 +21,24 @@ do
 done
 
 #== i3wm
-cp ~/.i3/config ~/.i3/config_bak
-ln -snf ~/dots/dir/.i3/config ~/.i3/config
-#== fcitx
-mkdir -p ~/.config/fcitx/conf
+cp ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
+#== fcitx設定
 ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
-#cp ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/profile
-ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
-mkdir -p ~/.config/mozc
-cp ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/config1.db
-cp ~/dots/files/fcitx/default/* /usr/share/fcitx/skin/default/
-cp ~/dots/files/fcitx/icon/* /usr/share/fcitx/mozc/icon/
+mkdir -p ~/.config/fcitx/conf; ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
+mkdir -p ~/.config/mozc; cp -f ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/
+#== fcitxスキン
+cp -f ~/dots/files/fcitx/default/* /usr/share/fcitx/skin/default/
+cp -f ~/dots/files/fcitx/icon/* /usr/share/fcitx/mozc/icon/
 #== font
 cp -rf ~/dots/files/fonts ~/.local/share/
-mkdir -p ~/.config/fontconfig
-ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 fc-cache -fv
 #== urxvt
-# ※.Xresourcesだとリンクが外れる
-#xrdb -remove
-#xrdb -merge ~/.Xresources
-cp ~/dots/urxvt_run.sh ~/
-chmod 700 ~/urxvt_run.sh
+#※.Xresourcesだとリンクが外れる
+#xrdb -remove; xrdb -merge ~/.Xresources
+cp -f ~/dots/urxvt_run.sh ~/; chmod 700 ~/urxvt_run.sh
 #== Pcmanfm
-mkdir -p ~/.config/pcmanfm/default
-cp ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/pcmanfm.conf
+mkdir -p ~/.config/pcmanfm/default; cp -f ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/
 
 echo -e "\n==== command succeeded ========================\n+ prepare ssh\n+ download & deploy dot files"
 echo -e "  ├ .config/\n  │  ├ fcitx/...\n  │  ├ fontconfig/...\n  │  ├ mozc/...\n  │  └ pcmanfm/...\n  ├ .i3/...\n  ├ .local/share/...    font files"
