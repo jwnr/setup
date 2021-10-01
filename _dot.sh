@@ -21,7 +21,7 @@ do
 done
 
 #== i3wm
-cp ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
+cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
 #== fcitx設定
 ln -snf ~/dots/dir/.config/fcitx/config ~/.config/fcitx/config
 mkdir -p ~/.config/fcitx/conf; ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
