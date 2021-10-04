@@ -6,10 +6,12 @@ echo -e "\n============================================================\n==== st
 # ==================================
 pacman-mirrors -c Japan,Taiwan,Singapore && pacman --noconfirm -Syyu
 
-# ==== locale
+# ==== locale, time
 # ==================================
 sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
+timedatectl set-ntp true
+#ntpdate ntp.nict.jp
 
 # ==== fonts
 # ==================================
