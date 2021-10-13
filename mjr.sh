@@ -19,6 +19,11 @@ timedatectl set-ntp true
 pacman --noconfirm -S otf-ipaexfont
 ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
+# ==== display
+# ==================================
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
+sed -i -e 's/^#display-setup-script=.*$/display-setup-script=~\/.screenlayout\/sl.sh/' /etc/lightdm/lightdm.conf
+
 # ==== packs
 # ==================================
 pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
