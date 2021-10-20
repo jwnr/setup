@@ -34,7 +34,7 @@ cp -rf ~/dots/files/fonts ~/.local/share/
 mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 fc-cache -fv
 #== display
-mkdir -p ~/.screenlayout; touch ~/.screenlayout/a.sh
+mkdir -p ~/.screenlayout; touch ~/.screenlayout/a.sh; chmod 755 ~/.screenlayout/a.sh
 ln -snf ~/.screenlayout/a.sh /etc/lightdm/sl/sl.sh
 #== urxvt
 #※.Xresourcesだとリンクが外れる
