@@ -24,7 +24,7 @@ ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
 mkdir /etc/lightdm/sl; chmod 777 /etc/lightdm/sl
 touch /etc/lightdm/sl/default.sh; ln -snf /etc/lightdm/sl/default.sh /etc/lightdm/sl/sl.sh
-sed -i -e 's/^#display-setup-script=.*$/display-setup-script=~\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
+sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
 
 # ==== packs
 # ==================================
