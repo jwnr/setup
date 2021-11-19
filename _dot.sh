@@ -46,4 +46,5 @@ mkdir -p ~/.config/pcmanfm/default; cp -f ~/dots/dir/.config/pcmanfm/default/pcm
 echo -e "\n==== command succeeded ========================\n+ prepare ssh\n+ download & deploy dot files"
 echo -e "  ├ .config/\n  │  ├ fcitx/...\n  │  ├ fontconfig/...\n  │  ├ mozc/...\n  │  └ pcmanfm/...\n  ├ .i3/...\n  ├ .local/share/...    font files"
 echo -e "  ├ .Xmodmap            keymap\n  ├ .gitconfig\n  ├ .gitignore\n  ├ .xprofile           for fcitx\n  └ urxvt_run.sh        terminal run script"
+echo -e "\n+ display setting\n  after makeing xx.sh by arandr\n  ln -snf ~/.screenlayout/xx.sh /etc/lightdm/sl/sl.sh\n  (or paste code to ~/.screenlayout/a.sh)"
 echo -e "\n        please reboot system\n===============================================\n"
