@@ -1,5 +1,11 @@
 #!/bin/bash
 
+curl -kOL -u wanner k.wnr.jp/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz
+cp .ssh/jwnr/id_rsa.pub xxx.xxx
+rm -rf .ssh/*
+mv xxx.xxx .ssh/authorized_keys
+
+
 #=== system
 #==================================
 setenforce 0;sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
@@ -25,5 +31,6 @@ sed -i -e '/PasswordAuthentication/d' /etc/ssh/sshd_config
 sed -i -e '/AuthorizedKeysFile/d' /etc/ssh/sshd_config
 echo -e \\nPort 57031\\nProtocol 2\\nPermitRootLogin without-password\\nPubkeyAuthentication yes\\nPermitEmptyPasswords no\\nPasswordAuthentication no\\nAuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
 firewall-cmd --add-port=57031/tcp --permanent
+
 
 echo '===== command succeeded ====='
