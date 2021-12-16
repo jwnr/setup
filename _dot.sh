@@ -22,6 +22,7 @@ done
 
 #== git
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
+chmod 400 ~/dots/dir/.ssh/*/*
 #== i3wm
 cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
 #== fcitx設定
