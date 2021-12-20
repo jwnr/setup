@@ -20,6 +20,8 @@ do
   ln -snf ~/dots/"$f" ~/
 done
 
+#== 全般設定
+echo -e "\n#==== my commands ====\nexport TERM=screen.linux" >> ~/.bashrc
 #== git
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
