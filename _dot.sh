@@ -45,6 +45,8 @@ ln -snf ~/.screenlayout/a.sh /etc/lightdm/sl/sl.sh
 #※.Xresourcesだとリンクが外れる
 #xrdb -remove; xrdb -merge ~/.Xresources
 cp -f ~/dots/urxvt_run.sh ~/; chmod 700 ~/urxvt_run.sh
+#== nvim
+ln -snf ~/dots/dir/.config/nvim/init.vim ~/.config/nvim/init.vim
 #== Pcmanfm
 mkdir -p ~/.config/pcmanfm/default; cp -f ~/dots/dir/.config/pcmanfm/default/pcmanfm.conf ~/.config/pcmanfm/default/
 
