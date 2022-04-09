@@ -21,3 +21,9 @@ sed -i -e '/PermitEmptyPasswords/d' /etc/ssh/sshd_config
 sed -i -e '/PasswordAuthentication/d' /etc/ssh/sshd_config
 sed -i -e '/AuthorizedKeysFile/d' /etc/ssh/sshd_config
 echo -e \\nPort 57031\\nProtocol 2\\nPermitRootLogin without-password\\nPubkeyAuthentication yes\\nPermitEmptyPasswords no\\nPasswordAuthentication no\\nAuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
+
+echo -e "\n==== succeeded ============================================="
+echo -e " + disable SELinux\n + disable nftables,firewalld"
+echo -e " + change locale & timezone (ja_JP.UTF-8 & Asia/Tokyo)"
+echo -e " + install packages\n  - "
+echo -e "============================================================\n"
