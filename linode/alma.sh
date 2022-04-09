@@ -8,11 +8,11 @@ systemctl disable nftables;systemctl disable firewalld;systemctl restart dbus
 # unbound-anchor.timer, atd, rhnsd
 
 dnf -y upgrade
+dnf -y install glibc-langpack-ja podman git
 
 timedatectl set-timezone Asia/Tokyo
-dnf -y install glibc-langpack-ja;localectl set-locale LANG=ja_JP.UTF-8
+localectl set-locale LANG=ja_JP.UTF-8
 
-dnf -y install podman
 mkdir -p .config/containers
 echo -e "unqualified-search-registries = [\"docker.io\"]" > .config/containers/registries.conf
 
@@ -30,5 +30,5 @@ echo -e \\nPort 57031\\nProtocol 2\\nPermitRootLogin without-password\\nPubkeyAu
 echo -e "\n==== succeeded ============================================="
 echo -e " + disable SELinux\n + disable nftables,firewalld"
 echo -e " + change locale & timezone (ja_JP.UTF-8 & Asia/Tokyo)"
-echo -e " + install packages\n  - "
+echo -e " + install packages\n  - podman, git"
 echo -e "============================================================\n"
