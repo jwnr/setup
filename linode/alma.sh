@@ -1,5 +1,6 @@
 setenforce 0;sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 systemctl disable nftables;systemctl disable firewalld;systemctl restart dbus
+
 #### daemon (active)
 # nis-domainname, smartd
 #### daemon (inactive)
@@ -10,6 +11,10 @@ dnf -y upgrade
 
 timedatectl set-timezone Asia/Tokyo
 dnf -y install glibc-langpack-ja;localectl set-locale LANG=ja_JP.UTF-8
+
+dnf -y install podman
+mkdir -p .config/containers
+echo -e "unqualified-search-registries = [\"docker.io\"]" > .config/containers/registries.conf
 
 sed -i -e '/^#Port *.*/d' /etc/ssh/sshd_config
 sed -i -e '/^Port *.*/d' /etc/ssh/sshd_config
