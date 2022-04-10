@@ -1,5 +1,6 @@
 systemctl disable nftables;systemctl disable firewalld;systemctl restart dbus
 
+systemctl disable selinux-autorelabel-mark import-state nis-domainname sssd kdump unbound-anchor.timer
 #### daemon (active)
 # nis-domainname, smartd
 #### daemon (inactive)
