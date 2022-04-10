@@ -7,7 +7,7 @@ systemctl disable nftables;systemctl disable firewalld;systemctl restart dbus
 # unbound-anchor.timer, atd, rhnsd
 
 dnf -y upgrade
-dnf -y install glibc-langpack-ja podman git
+dnf -y install podman git
 
 timedatectl set-timezone Asia/Tokyo
 localectl set-locale LANG=ja_JP.UTF-8
