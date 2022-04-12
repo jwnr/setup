@@ -28,8 +28,9 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 
 # ==== packs
 # ==================================
-#pacman -S --needed --noconfirm git rxvt-unicode neovim vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
-pacman -S --needed --noconfirm git rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
+# neovim
+pacman -S --needed --noconfirm git rxvt-unicode unzip vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
+pacman -S --needed --noconfirm nodejs-lts-gallium npm deno; deno upgrade
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 pacman -Scc; pamac clean
 
@@ -37,7 +38,7 @@ echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
 echo -e " + change locale (ja_JP.UTF-8)"
 echo -e " + prepare font (install IPAex, disable bitmap font)"
-#echo -e " + install packages (by pacman)\n  - git, rxvt, neovim, Vivaldi, dolphin, rofi, fcitx"
-echo -e " + install packages (by pacman)\n  - git, rxvt, Vivaldi, dolphin, rofi, fcitx"
-echo -e " + install packages (by pamac)\n  - GoogleChrome, GoogleChrome_beta, VisualStudioCode"
+echo -e " + install packages (by pacman)\n  - git, rxvt, unzip, Vivaldi, dolphin, rofi, fcitx"
+echo -e "  - Node.js(16), npm, Deno(latest)"
+echo -e " + install packages (by pamac)\n  - Chrome, Chrome beta, Edge, VS Code"
 echo -e "============================================================\n"
