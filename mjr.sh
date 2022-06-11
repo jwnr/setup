@@ -34,6 +34,8 @@ pacman -S --needed --noconfirm git rxvt-unicode unzip vivaldi vivaldi-ffmpeg-cod
 pacman -S --needed --noconfirm nodejs-lts-gallium npm deno; deno upgrade
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 pacman -Scc; pamac clean
+xdg-mime default microsoft-edge.desktop x-scheme-handler/http
+xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
