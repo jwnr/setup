@@ -30,7 +30,7 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 # ==================================
 # neovim
 pacman -R --noconfirm clipit
-pacman -S --needed --noconfirm git rxvt-unicode unzip wmfocus vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
+pacman -S --needed --noconfirm git rxvt-unicode unzip vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
 pacman -S --needed --noconfirm nodejs-lts-gallium npm deno; deno upgrade
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 pacman -Scc; pamac clean
