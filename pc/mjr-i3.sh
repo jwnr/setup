@@ -30,8 +30,8 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 # ==================================
 # neovim nodejs-lts nodejs-lts-gallium
 pacman -R --noconfirm clipit
-pacman -S --needed --noconfirm git rxvt-unicode unzip vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
-pacman -S --needed --noconfirm nodejs npm deno; deno upgrade
+pacman -S --needed --noconfirm git unzip unrar nodejs npm deno; deno upgrade
+pacman -S --needed --noconfirm rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 pacman -Scc; pamac clean
 xdg-mime default microsoft-edge.desktop x-scheme-handler/http
