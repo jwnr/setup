@@ -11,7 +11,7 @@ dnf -y upgrade
 dnf -y install podman git
 
 timedatectl set-timezone Asia/Tokyo
-localectl set-locale LANG=ja_JP.UTF-8
+#localectl set-locale LANG=ja_JP.UTF-8
 
 mkdir -p .config/containers
 echo -e "unqualified-search-registries = [\"docker.io\"]" > .config/containers/registries.conf
