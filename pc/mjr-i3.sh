@@ -37,12 +37,18 @@ pacman -Scc; pamac clean
 xdg-mime default microsoft-edge.desktop x-scheme-handler/http
 xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
+# ==== hosts customize for Edge
+# ==================================
+echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com >> /etc/hosts
+echo -e \\n127.0.0.1 ntp.msn.com\\n127.0.0.1 api.msn.com\\n127.0.0.1 assets.msn.com >> /etc/hosts
+
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
 echo -e " + change locale (ja_JP.UTF-8)"
 echo -e " + prepare font (install IPAex, disable bitmap font)"
 echo -e " + remove package\n    - ClipIt"
 echo -e " + install packages (by pacman)\n    - git, rxvt, unzip, unrar, Vivaldi, dolphin, rofi, fcitx"
-echo -e "    - Node.js(18 latest), npm, Deno(latest)"
+echo -e "    - Node.js(latest), npm, Deno(latest)"
 echo -e " + install packages (by pamac)\n    - Chrome, Chrome beta, Edge, VS Code"
+echo -e " + block some URL by adding hosts (for Edge)"
 echo -e "============================================================\n"
