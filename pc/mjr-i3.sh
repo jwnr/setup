@@ -39,8 +39,7 @@ xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
 # ==== hosts customize for Edge
 # ==================================
-echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com >> /etc/hosts
-echo -e \\n127.0.0.1 ntp.msn.com\\n127.0.0.1 api.msn.com\\n127.0.0.1 assets.msn.com >> /etc/hosts
+echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
