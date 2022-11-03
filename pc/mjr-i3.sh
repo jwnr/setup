@@ -16,7 +16,7 @@ timedatectl set-ntp true
 
 # ==== fonts
 # ==================================
-pacman --noconfirm -S otf-ipaexfont
+pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
 ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 # ==== display
