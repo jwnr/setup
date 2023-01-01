@@ -30,7 +30,7 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 # ==================================
 # neovim nodejs-lts nodejs-lts-gallium
 pacman -R --noconfirm clipit
-pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader frameshot vokoscreen
+pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot vokoscreen
 pacman -S --needed --noconfirm git nodejs npm deno; deno upgrade
 pacman -S --needed --noconfirm rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
@@ -47,8 +47,11 @@ echo -e " + optimize mirror priority\n + sync package databases & upgrade local 
 echo -e " + change locale (ja_JP.UTF-8)"
 echo -e " + prepare font (install IPAex, disable bitmap font)"
 echo -e " + remove package\n    - ClipIt"
-echo -e " + install packages (by pacman)\n    - git, rxvt, unzip, unrar, Vivaldi, dolphin, rofi, fcitx"
+echo -e " + install packages (by pacman)\n    - git, rxvt, unzip, unrar, Vivaldi, dolphin, rofi, fcitx, flameshot"
 echo -e "    - Node.js(latest), npm, Deno(latest)"
 echo -e " + install packages (by pamac)\n    - Chrome, Chrome beta, Edge, VS Code"
 echo -e " + block some URL by adding hosts (for Edge)"
+echo -e " +--------------------+------------------+"
+echo -e " | screen recorder    | Vokoscreen       |"
+echo -e " | video editor       | Shotcut          |"
 echo -e "============================================================\n"
