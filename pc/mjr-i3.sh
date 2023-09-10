@@ -4,6 +4,8 @@ echo -e "\n============================================================\n==== st
 
 # ==== mirror config
 # ==================================
+sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
 pacman-mirrors -c Japan,Taiwan,Singapore && pacman --noconfirm -Syyu
 
 # ==== locale, time
@@ -17,7 +19,8 @@ timedatectl set-ntp true
 # ==== fonts
 # ==================================
 pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
-ln -snf /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
 
 # ==== display
 # ==================================
@@ -28,10 +31,10 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 
 # ==== packs
 # ==================================
-# neovim nodejs-lts nodejs-lts-gallium
+# neovim jq nodejs-lts nodejs-lts-gallium bun
 pacman -R --noconfirm clipit
 pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
-pacman -S --needed --noconfirm git nodejs npm deno; deno upgrade
+pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
 pacman -S --needed --noconfirm rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
 pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 pacman -Scc; pamac clean
