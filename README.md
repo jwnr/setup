@@ -9,7 +9,7 @@ curl -sL s.wnr.jp/mjr | sh
 curl -sL d.wnr.jp | sh
 ```
 
-|| npm | bun |
-|:-|:-|:-|
-| SvelteKit | [Link](https://kit.svelte.dev/) npm create svelte@latest xxx | bunx create-svelte xxx |
-| Astro     | [Link](https://astro.build/) npm create astro@latest | bunx create-astro |
+|  |  |  | npm |  | bun |
+|:-|:-|:-|:-|:-|:-|
+| SvelteKit | [SvelteKit](https://kit.svelte.dev/) | npm create svelte@latest xxx | [Bun-Guide](https://bun.sh/guides/ecosystem/sveltekit) | bunx create-svelte xxx |
+| Astro     | [Astro](https://astro.build/) | npm create astro@latest             | [Bun-Guide](https://bun.sh/guides/ecosystem/astro) | bunx create-astro |
