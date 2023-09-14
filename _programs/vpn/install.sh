@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # need to open port 51820
+# required sudo, reboot
 
 dnf install -y wireguard-tools
 cp ./jkbrn.conf /etc/wireguard/
