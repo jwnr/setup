@@ -32,7 +32,7 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 # ==== packs
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun
-pacman -R --noconfirm clipit
+pacman -R --noconfirm clipit palemoon pcmanfm
 pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
 pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
 pacman -S --needed --noconfirm rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
