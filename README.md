@@ -5,7 +5,7 @@ curl -sL s.jwnr.net/mjr-i3 | sh
 
 
 ## ドットファイルデプロイ [ユーザー実行]
-curl -sL d.wnr.jp | sh
+curl -sL d.jwnr.net | sh
 ```
 
 |  | npm |  | bun |  |
