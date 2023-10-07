@@ -1,6 +1,11 @@
 setenforce 0;sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
-systemctl disable selinux-autorelabel-mark sssd kdump atd nftables firewalld
+systemctl disable firewalld
+systemctl disable nftables
+systemctl disable selinux-autorelabel-mark 
+systemctl disable sssd
+systemctl disable kdump
+systemctl disable atd
 systemctl restart dbus
 
 dnf -y upgrade
