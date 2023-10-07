@@ -1,9 +1,8 @@
 
 ```
-## セットアップ [root実行]
-curl -sL s.wnr.jp/alm | sh
-curl -sL s.wnr.jp/mjr | sh
-※sudoではなく
+## セットアップ [root実行 ※sudoではなく]
+curl -sL s.jwnr.net/mjr-i3 | sh
+
 
 ## ドットファイルデプロイ [ユーザー実行]
 curl -sL d.wnr.jp | sh
