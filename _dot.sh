@@ -4,7 +4,7 @@ echo -e "\n=========================================\n==== command started =====
 
 #==== prepare ssh
 #==================================
-cd ~; curl -kOL -u wanner https://k.wnr.jp/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz
+cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz
 chmod -R 400 .ssh/*
 
 #==== download & deploy
