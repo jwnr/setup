@@ -10,7 +10,7 @@ curl -sL d.jwnr.net | sh
 
 |  | npm |  | bun |  |
 |:-|:-|:-|:-|:-|
-| Astro     | npm create astro@latest      | [Astro](https://astro.build/)                   | bun x create-astro      | [Bun-Guide](https://bun.sh/guides/ecosystem/astro)     |
-| SvelteKit | npm create svelte@latest xxx | [SvelteKit](https://kit.svelte.dev/)            | bun x create-svelte xxx | [Bun-Guide](https://bun.sh/guides/ecosystem/sveltekit) |
-| Next.js   | npx create-next-app@latest   | [Next.js](https://nextjs.org/)                  | bun x create-next-app   | [Bun-Guide](https://bun.sh/guides/ecosystem/nextjs)    |
-| hono      | npm create hono@latest xxx   | [Hono](https://hono.dev/getting-started/nodejs) | bun create hono xxx     | [Hono](https://hono.dev/getting-started/bun)<br>[Bun](https://bun.sh/guides/ecosystem/hono)  |
+| Astro     | npm create astro@latest      | [Astro](https://astro.build/)                   | bun create astro             | [Bun-Guide](https://bun.sh/guides/ecosystem/astro)     |
+| SvelteKit | npm create svelte@latest xxx | [SvelteKit](https://kit.svelte.dev/)            | bun create svelte@latest xxx | [Bun-Guide](https://bun.sh/guides/ecosystem/sveltekit) |
+| Next.js   | npx create-next-app@latest   | [Next.js](https://nextjs.org/)                  | bun create next-app          | [Bun-Guide](https://bun.sh/guides/ecosystem/nextjs)    |
+| hono      | npm create hono@latest xxx   | [Hono](https://hono.dev/getting-started/nodejs) | bun create hono xxx          | [Hono](https://hono.dev/getting-started/bun)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/hono)  |
