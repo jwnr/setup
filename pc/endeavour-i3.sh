@@ -5,16 +5,13 @@ echo -e "\n============================================================\n==== st
 # ==== mirror config
 # ==================================
 sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-reflector -c JP,SG,TW --sort country --protocol https,rsync -l 5 && pacman -Syyu
-eos-rankmirrors && eos-update
+reflector -l 16 -n 8 -c JP,SG,TW --sort country -p https,rsync && pacman -Syyu
+eos-rankmirrors --sort age && eos-update --yay
 
 # ==== locale, time
 # ==================================
 #sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
-#timedatectl set-ntp true
-#systemctl enable systemd-timesyncd
-#ntpdate ntp.nict.jp
 
 # ==== fonts
 # ==================================
@@ -39,8 +36,8 @@ sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\
 pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
 pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
 pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs fcitx5-im fcitx5-mozc
-pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-pacman -Scc; pamac clean
+yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+pacman -Scc; yay -Scc
 xdg-mime default microsoft-edge.desktop x-scheme-handler/http
 xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
