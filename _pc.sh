@@ -4,7 +4,7 @@ echo -e "\n============================================================\n==== st
 
 echo 'Select OS'
 PS3='Selected OS : '
-select OS in 'EndeavourOS-i3wm' 'Manjaro-i3wm' cancel
+select OS in 'EndeavourOS-i3wm' 'Manjaro-i3wm' 'cancel'
 
 do
   if [ $REPLY -eq 1 ]; then
@@ -36,6 +36,7 @@ do
     xdg-mime default microsoft-edge.desktop x-scheme-handler/http
     xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
+    break
 
   elif [ $REPLY -eq 2]; then
     # ==== mirror config
@@ -71,8 +72,11 @@ do
     xdg-mime default microsoft-edge.desktop x-scheme-handler/http
     xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
-  fi  
-  break
+    break
+
+  else
+    break
+  fi
 done
 
 # ==== fonts
