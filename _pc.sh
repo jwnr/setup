@@ -11,7 +11,7 @@ do
     # ==== mirror config
     # ==================================
     sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-    reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman -Syyu
+    reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu
     eos-rankmirrors --sort age && eos-update --yay
 
     # ==== locale, time
@@ -20,8 +20,8 @@ do
 
     # ==== display
     # ==================================
-    pacman -S sddm
-    systemctl enable sddm
+    #pacman -S sddm
+    #systemctl enable sddm
 
     # ==== packs
     # ==================================
@@ -31,10 +31,10 @@ do
     pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
     pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
     pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs fcitx5-im fcitx5-mozc
-    yay -S google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-    pacman -Scc; yay -Scc
-    xdg-mime default microsoft-edge.desktop x-scheme-handler/http
-    xdg-mime default microsoft-edge.desktop x-scheme-handler/https
+    yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+    pacman --noconfirm -Scc; yay --noconfirm -Scc
+    #xdg-mime default microsoft-edge.desktop x-scheme-handler/http
+    #xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
     break
 
