@@ -1,7 +1,7 @@
 #!/bin/bash
+# eos-update の noconfirm的オプション
 
-echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
-
+echo -e "\n=========================================\n==== command started ====================\n=========================================\n"
 echo 'Select OS'
 PS3='Selected OS : '
 select OS in 'EndeavourOS-i3wm' 'Manjaro-i3wm' 'cancel'
@@ -25,11 +25,11 @@ do
 
     # ==== packs
     # ==================================
-    # neovim jq nodejs-lts nodejs-lts-gallium bun
+    # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
     # rxvt-unicode dolphin rofi
-    #pacman -R --noconfirm
+    #pacman -R --noconfirm ~~~
     pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
-    pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
+    pacman -S --needed --noconfirm git nodejs npm; npm update -g npm
     pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs fcitx5-im fcitx5-mozc
     yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
     pacman --noconfirm -Scc; yay --noconfirm -Scc
