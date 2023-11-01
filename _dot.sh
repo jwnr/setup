@@ -30,11 +30,9 @@ do
 
   if [ $REPLY -eq 1 ]; then
     #== fcitx設定
-    echo -e "export LANG='ja_JP.UTF-8'\nexport XMODIFIERS='@im=fcitx'\nexport XMODIFIER='@im=fcitx'\n" >> ~/.bashrc
-    echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport DefaultIMModule=fcitx\n" >> ~/.bashrc
-    mkdir -p ~/.config/fcitx/conf; cp -f ~/dots/dir/.config/fcitx/config ~/.config/fcitx/; cp -f ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/
-    ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
-    mkdir -p ~/.config/mozc; cp -f ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/
+    #mkdir -p ~/.config/fcitx/conf; cp -f ~/dots/dir/.config/fcitx/config ~/.config/fcitx/; cp -f ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/
+    #ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
+    #mkdir -p ~/.config/mozc; cp -f ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/
 
     break
 
@@ -45,8 +43,8 @@ do
     #== sway
     #cp -f ~/.sway/config ~/.sway/config_bak; ln -snf ~/dots/dir/.sway/config ~/.sway/config
     #== fcitx設定
-    echo -e "export LANG='ja_JP.UTF-8'\nexport XMODIFIERS='@im=fcitx'\nexport XMODIFIER='@im=fcitx'\n" >> ~/.bashrc
-    echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport DefaultIMModule=fcitx\n" >> ~/.bashrc
+    echo -e "export LANG='ja_JP.UTF-8'\nexport XMODIFIERS='@im=fcitx'\nexport XMODIFIER='@im=fcitx'\n" >> ~/.xprofile
+    echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport DefaultIMModule=fcitx\n" >> ~/.xprofile
     mkdir -p ~/.config/fcitx/conf; cp -f ~/dots/dir/.config/fcitx/config ~/.config/fcitx/; cp -f ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/
     ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
     mkdir -p ~/.config/mozc; cp -f ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/
