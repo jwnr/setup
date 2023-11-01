@@ -36,6 +36,9 @@ do
     #xdg-mime default microsoft-edge.desktop x-scheme-handler/http
     #xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
+    #== fcitx設定
+    echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+
     break
 
   elif [ $REPLY -eq 2]; then
@@ -77,17 +80,18 @@ do
   else
     break
   fi
+
+  # ==== fonts
+  # ==================================
+  pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
+  ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+  ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
+
+  # ==== hosts customize for Edge
+  # ==================================
+  echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
+  
 done
-
-# ==== fonts
-# ==================================
-pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
-ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-
-# ==== hosts customize for Edge
-# ==================================
-echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
 
 
 echo -e "\n==== succeeded ============================================="
