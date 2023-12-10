@@ -11,14 +11,14 @@ git clone git@github.com:jwnr/dots.git
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
 
-echo -e "\n============================================================\n==== command started =======================================\n============================================================\n"
+echo -e "\n==== command started =======================================\n"
 
 
 # ==== mirror config
 # ==================================
 #sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-echo $pswd | sudo -S reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && echo $pswd | sudo -S pacman --noconfirm -Syyu
-echo $pswd | sudo -S eos-rankmirrors --sort age && echo $pswd | sudo -S eos-update --yay
+echo $pswd | sudo -S sh -c 'reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu'
+echo $pswd | sudo -S sh -c 'eos-rankmirrors --sort age && eos-update --yay'
 
 # ==== locale, time
 # ==================================
@@ -30,7 +30,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 # rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
 #echo $pswd | sudo -S pacman -R --noconfirm ~~~
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
-echo $pswd | sudo -S pacman -S --needed --noconfirm git nodejs npm; npm update -g npm
+echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
 yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
@@ -49,7 +49,7 @@ fc-cache -fv
 
 # ==== fcitx設定
 # ==================================
-echo $pswd | sudo -S echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+echo $pswd | sudo -S sh -c 'echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile'
 rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
 rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
@@ -58,14 +58,14 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 
 # == i3wm
-#cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
+cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
 
 
 
 # ==== other setting
 # ==================================
 # == hosts customize for Edge
-echo $pswd | sudo -S echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
+echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts'
 # == GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 # == terminal
