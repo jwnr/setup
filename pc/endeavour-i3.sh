@@ -1,7 +1,9 @@
 #!/bin/bash
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
-echo -e '********************************************\n  + You need to do "sudo xx" before this shell. Have you done it?\n  + This shell cannot pipe to "| sh". Download and execute.****'
+echo -e '********************************************\n'
+echo -e '  + You need to do "sudo xx" before this shell.\n        Have you done it?\n  + This shell cannot pipe to "| sh".        Download and execute, ok?.\n'
+echo -e '********************************************\n\n'
 
 read -sp "Enter root password: " pswd
 echo
