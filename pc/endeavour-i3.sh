@@ -17,8 +17,8 @@ echo -e "\n============================================================\n==== co
 # ==== mirror config
 # ==================================
 #sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-echo $pswd | sudo -S reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu
-echo $pswd | sudo -S eos-rankmirrors --sort age && eos-update --yay
+echo $pswd | sudo -S reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && echo $pswd | sudo -S pacman --noconfirm -Syyu
+echo $pswd | sudo -S eos-rankmirrors --sort age && echo $pswd | sudo -S eos-update --yay
 
 # ==== locale, time
 # ==================================
@@ -32,7 +32,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S pacman -S --needed --noconfirm git nodejs npm; npm update -g npm
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
-echo $pswd | sudo -S yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
 #echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/http
 #echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
