@@ -23,7 +23,7 @@ do
   mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
   fc-cache -fv
   #== GitHub
-  echo -e "[user]\n  email = 187tch@gmail.com\n    name = wanner" >> ~/.bashrc
+  echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
   #== i3wm
   cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
 
