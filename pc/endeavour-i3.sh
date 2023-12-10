@@ -2,48 +2,77 @@
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 
+read -sp "Enter root password: " pswd
+
+# == get key files & dotfiles
+cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
+git clone git@github.com:jwnr/dots.git
+# == SSH
+rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
+chmod 400 ~/dots/dir/.ssh/*/*
+
+echo -e "\n============================================================\n==== command started =======================================\n============================================================\n"
+
+
 # ==== mirror config
 # ==================================
-sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-reflector -l 16 -n 8 -c JP,SG,TW --sort country -p https,rsync && pacman -Syyu
-eos-rankmirrors --sort age && eos-update --yay
+#sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
+echo $pswd | sudo -S reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu
+echo $pswd | sudo -S eos-rankmirrors --sort age && eos-update --yay
 
 # ==== locale, time
 # ==================================
-#sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
-sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
-
-# ==== fonts
-# ==================================
-pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
-ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-
-# ==== display
-# ==================================
-pacman -S sddm
-systemctl enable sddm
-cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
-mkdir /etc/lightdm/sl; chmod 777 /etc/lightdm/sl
-touch /etc/lightdm/sl/default.sh; chmod 755 /etc/lightdm/sl/default.sh; ln -snf /etc/lightdm/sl/default.sh /etc/lightdm/sl/sl.sh
-sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
+echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
 
 # ==== packs
 # ==================================
-# neovim jq nodejs-lts nodejs-lts-gallium bun
-# rxvt-unicode dolphin rofi
-#pacman -R --noconfirm
-pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
-pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
-pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs fcitx5-im fcitx5-mozc
-yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-pacman -Scc; yay -Scc
-xdg-mime default microsoft-edge.desktop x-scheme-handler/http
-xdg-mime default microsoft-edge.desktop x-scheme-handler/https
+# neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
+# rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
+#echo $pswd | sudo -S pacman -R --noconfirm ~~~
+echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S pacman -S --needed --noconfirm git nodejs npm; npm update -g npm
+echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
+echo $pswd | sudo -S yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
+#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/http
+#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
-# ==== hosts customize for Edge
+
+# ==== fonts
 # ==================================
-echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
+echo $pswd | sudo -S pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
+echo $pswd | sudo -S ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+echo $pswd | sudo -S ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
+cp -rf ~/dots/files/fonts ~/.local/share/
+mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+fc-cache -fv
+
+# ==== fcitx設定
+# ==================================
+echo $pswd | sudo -S echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
+rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
+
+# ==== display
+# ==================================
+
+
+# == i3wm
+#cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
+
+
+
+# ==== other setting
+# ==================================
+# == hosts customize for Edge
+echo $pswd | sudo -S echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
+# == GitHub
+echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
+# == terminal
+echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
+
+
+
 
 echo -e "\n==== succeeded ============================================="
 echo -e " + optimize mirror priority\n + sync package databases & upgrade local packages"
