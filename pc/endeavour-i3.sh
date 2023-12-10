@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
-echo -e '********************************************\n'
-echo -e '  + You need to do "sudo xx" before this shell.\n        Have you done it?\n  + This shell cannot pipe to "| sh".        Download and execute, ok?.\n'
-echo -e '********************************************\n\n'
+echo -e '*****************************************************'
+echo -e '  + You need to do "sudo xx" before this shell.\n        Have you done it?\n  + This shell cannot pipe to "| sh".\n        Download and execute, ok?.'
+echo -e '*****************************************************\n'
 
 read -sp "Enter root password: " pswd
 echo
@@ -62,7 +62,7 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 
 # == i3wm
-cp -f ~/.i3/config ~/.i3/config_bak; ln -snf ~/dots/dir/.i3/config ~/.i3/config
+cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/end/dir/.config/i3/config ~/.config/i3/config
 
 
 
