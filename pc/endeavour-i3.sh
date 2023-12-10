@@ -1,8 +1,10 @@
 #!/bin/bash
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
+echo -e '**** You need to do "sudo xxxx" before this shell. Have you done it? ****'
 
 read -sp "Enter root password: " pswd
+echo
 
 # == get key files & dotfiles
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
