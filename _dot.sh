@@ -30,9 +30,9 @@ do
 
   if [ $REPLY -eq 1 ]; then
     #== fcitx設定
-    #mkdir -p ~/.config/fcitx/conf; cp -f ~/dots/dir/.config/fcitx/config ~/.config/fcitx/; cp -f ~/dots/dir/.config/fcitx/profile ~/.config/fcitx/
+    rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
     #ln -snf ~/dots/dir/.config/fcitx/conf/fcitx-classic-ui.config ~/.config/fcitx/conf/fcitx-classic-ui.config
-    #mkdir -p ~/.config/mozc; cp -f ~/dots/dir/.config/mozc/config1.db ~/.config/mozc/
+    rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
     break
 
