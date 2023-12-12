@@ -38,8 +38,22 @@ echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git nodejs npm; npm u
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
 yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
-#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/http
-#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
+
+#### default browser
+# microsoft-edge.desktop
+# google-chrome.desktop
+# google-chrome-beta.desktop
+# vivaldi-stable.desktop
+# firefox.desktop
+## command
+#xdg-mime default xxxx.desktop x-scheme-handler/http
+#xdg-mime default xxxx.desktop x-scheme-handler/https
+#xdg-settings set default-web-browser xxxx.desktop
+## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
+#~/.config/mimeapps.list (new file)
+#/usr/share/applications/mimeinfo.cache
+## add variable "BROWSER=firefox"
+#/usr/lib/environment.d/99-environment.conf
 
 
 # ==== fonts
