@@ -39,22 +39,20 @@ echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codec
 yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
 
+
 #### default browser
 # microsoft-edge.desktop
 # google-chrome.desktop
 # google-chrome-beta.desktop
 # vivaldi-stable.desktop
 # firefox.desktop
-## command
-#xdg-mime default xxxx.desktop x-scheme-handler/http
+## command (doesn't work)
 #xdg-mime default xxxx.desktop x-scheme-handler/https
 #xdg-settings set default-web-browser xxxx.desktop
 ## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
-#~/.config/mimeapps.list (new file)
-#/usr/share/applications/mimeinfo.cache
-## add variable "BROWSER=firefox"
-#/usr/lib/environment.d/99-environment.conf
-
+#~/.config/mimeapps.list
+echo $pswd | sudo -S sed -i -e 's/^.*x-schme-handler\/http=.*$/x-schme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache;
+echo $pswd | sudo -S sed -i -e 's/^.*x-schme-handler\/https=.*$/x-schme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache;
 
 # ==== fonts
 # ==================================
