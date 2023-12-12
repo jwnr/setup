@@ -63,6 +63,7 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 # == i3wm
 # ==================================
 cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/end/dir/.config/i3/config ~/.config/i3/config
+cp -f ~/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf_bak; ln -snf ~/dots/end/dir/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 
 # ==== other setting
 # ==================================
