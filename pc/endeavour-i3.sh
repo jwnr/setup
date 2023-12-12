@@ -72,6 +72,8 @@ echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n1
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 # terminal
 echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
+# keymap
+cp ~/dots/.Xmodmap ~/
 
 
 echo -e "\n==== succeeded ============================================="
