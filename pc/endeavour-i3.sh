@@ -51,8 +51,8 @@ echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
 #xdg-settings set default-web-browser xxxx.desktop
 ## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
 #~/.config/mimeapps.list
-echo $pswd | sudo -S sed -i -e 's/^.*x-schme-handler\/http=.*$/x-schme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache;
-echo $pswd | sudo -S sed -i -e 's/^.*x-schme-handler\/https=.*$/x-schme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache;
+echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
+echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 
 # ==== fonts
 # ==================================
