@@ -20,7 +20,11 @@ echo -e "\n==== command started =======================================\n"
 
 # ==== mirror config
 # ==================================
-#sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
+# /etc/pacman.conf
+#   - VerbosePkgLists
+#   - ParallelDownloads = 5
+#   - Color
+#   - ILoveCandy
 echo $pswd | sudo -S sh -c 'reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu'
 echo $pswd | sudo -S sh -c 'eos-rankmirrors --sort age && eos-update --yay'
 
