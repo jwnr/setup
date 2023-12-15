@@ -25,7 +25,7 @@ echo -e "\n==== command started =======================================\n"
 #   - ParallelDownloads = 5
 #   - Color
 #   - ILoveCandy
-echo $pswd | sudo -S sh -c 'reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu'
+echo $pswd | sudo -S sh -c 'reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score && pacman --noconfirm -Syyu'
 echo $pswd | sudo -S sh -c 'eos-rankmirrors --sort age && eos-update --yay'
 
 # ==== locale, time
