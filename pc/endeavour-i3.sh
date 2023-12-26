@@ -95,6 +95,8 @@ echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
 # keymap
 cp ~/dots/.Xmodmap ~/
+# wallpaper
+cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
 
 echo -e "\n==== succeeded ============================================="
