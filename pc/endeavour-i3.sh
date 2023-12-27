@@ -43,8 +43,8 @@ echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codec
 yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
 
-
-#### default browser
+# ==== default browser
+# ==================================
 # microsoft-edge.desktop
 # google-chrome.desktop
 # google-chrome-beta.desktop
