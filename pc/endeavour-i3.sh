@@ -72,7 +72,7 @@ fc-cache -fv
 # /usr/share/icons/hicolor/00x00/apps/
 # 32 48 128
 echo $pswd | sudo -S sh -c 'echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile'
-cp ~/dots/files/fcitx5/icon/* /tmp/zxcv/
+rsync -a ~/dots/files/fcitx5/icon/* /tmp/zxcv/
 echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/* /usr/share/icons/hicolor/32x32/apps/'
 rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
 rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
