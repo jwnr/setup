@@ -40,7 +40,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
-yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin microsoft-edge-beta-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
 
 # ==== default browser
