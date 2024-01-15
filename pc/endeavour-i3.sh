@@ -10,6 +10,7 @@ echo
 
 # == get key files & dotfiles
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
+echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git'
 git clone git@github.com:jwnr/dots.git
 # == SSH
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
@@ -38,7 +39,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 # rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
 #echo $pswd | sudo -S pacman -R --noconfirm ~~~
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
-echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git nodejs npm; npm update -g npm'
+echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
 yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin microsoft-edge-beta-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc; yay --noconfirm -Scc
