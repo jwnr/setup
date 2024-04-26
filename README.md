@@ -21,9 +21,6 @@ curl -sL d.jwnr.net | sh
 
 ## Bun workspaces (モノレポ)
 ```
-
-
-
 #### ディレクトリ構造
 <root>
 ├ packages/      <--- pckgs, prjs, apps, etc...
@@ -34,6 +31,8 @@ curl -sL d.jwnr.net | sh
 ├ ...
 ├ package.json   <--- ## 要編集 ##
 └ ...
+
+
 
 #### <root>/package.json
 {
