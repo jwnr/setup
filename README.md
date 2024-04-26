@@ -18,6 +18,40 @@ curl -sL d.jwnr.net | sh
 | Prisma |      | [Prisma](https://www.prisma.io/) |      | [Prisma](https://www.prisma.io/docs/orm/tools/prisma-cli#bun)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/prisma)  |
 ---
 
+
+## Bun workspaces (モノレポ)
+```
+<root>
+├ packages/      <--- pckgs, prjs, apps, etc...
+│  ├ aaa         <-┐
+│  ├ bbb         <-┴- package directorys
+│  └ ...
+├ bun.lockb
+├ ...
+├ package.json   <--- ## 要編集 ##
+└ ...
+
+## <root>/package.json
+{
+  "name": "monorepo"
+  ...
+  "workspaces": [      <-┐
+    "packages/*"       <-┼- 追記
+  ],                   <-┘
+  ...
+}
+
+## <root>/packages/aaa/package.json
+{
+  "name": "aaa"      <--- 必須
+  ...
+}
+
+
+```
+
+
+
 ## Svelte, Sveltekit
 
 
