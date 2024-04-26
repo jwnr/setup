@@ -21,6 +21,8 @@ curl -sL d.jwnr.net | sh
 
 ## Bun workspaces (モノレポ)
 ```
+
+#### ディレクトリ構造
 <root>
 ├ packages/      <--- pckgs, prjs, apps, etc...
 │  ├ aaa         <-┐
@@ -31,7 +33,7 @@ curl -sL d.jwnr.net | sh
 ├ package.json   <--- ## 要編集 ##
 └ ...
 
-## <root>/package.json
+#### <root>/package.json
 {
   "name": "monorepo"
   ...
@@ -41,7 +43,7 @@ curl -sL d.jwnr.net | sh
   ...
 }
 
-## <root>/packages/aaa/package.json
+#### <root>/packages/aaa/package.json
 {
   "name": "aaa"      <--- 必須
   ...
