@@ -65,6 +65,64 @@ curl -sL d.jwnr.net | sh
 <br><br>
 
 
+## Bun テスト
++ jest に相当するのかな (jestから移行可能)
++ モック
+  - スパイ
++ スナップショット
++ DOMテスト (by happy-dom)
+
+## コマンド
+```
+## 基本
+bun test
+
+## 特定 (/test/xxxx.test.js)
+bun test xxxx
+
+## 特定 (テストファイル内の関数)
+bun test -t xxxx
+
+##
+bun test --coverage
+
+
+
+--watch    変更検知 & テストrun
+--bail     １つのエラーで即停止
+--bail 4   ４つの...
+--timeout 
+--rerun
+```
+
+## コード
+```
+#### 基本
+#########################
+import { expect, test } from "bun:test";
+
+test("2 + 2", () => {
+  expect(2 + 2).toBe(4);
+});
+
+#### aa
+#########################
+
+
+
+
+
+# 未実装の部分を書いとく
+test.todo("コメント")
+
+# 使いどころがよくわからん
+test.skip("asdfasdf", ()=>{...})
+
+```
+
+<br><br>
+
+
 ## Svelte, Sveltekit
 
 
@@ -88,6 +146,9 @@ curl -sL d.jwnr.net | sh
 </svelte:head>
 
 ```
+
+<br><br>
+
 
 ## Bun + Sveltekit
 
