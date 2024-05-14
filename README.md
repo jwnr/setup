@@ -70,7 +70,9 @@ curl -sL d.jwnr.net | sh
 + モック
   - スパイ
 + スナップショット
-+ DOMテスト (by happy-dom)
++ DOMの要素を取得するテストでは happy-dom(jsdom) が必要 ( bun add -D happy-dom ??? )
++ vite.config.ts で globals: true を書かなくても、 test,describe,expect 等の import が効く?
+
 
 ## コマンド
 ```
@@ -97,17 +99,86 @@ bun test --coverage
 
 ## コード
 ```
+## describe
+関連するテストをグループ化
+
+
+## it, test
+テスト
+
+
+## beforeAll / afterAll
+テスト実行前/後に一度だけ実行
+
+
+## beforeEach / afterEach
+各テストの前/後に都度実行
+
+
+
 #### 基本
 #########################
 import { expect, test } from "bun:test";
 
-test("2 + 2", () => {
+test("テスト名", () => {
+  // 一致すれば pass
   expect(2 + 2).toBe(4);
+
+  // 一致しなければ pass
+  expect(2 + 2).not.toBe(4);
 });
 
-#### aa
-#########################
 
+#### 条件分岐
+#########################
+est.if(Math.random() > 0.5)("runs half the time", () => {
+  // ...
+});
+
+const macOS = process.arch === "darwin";
+test.if(macOS)("runs on macOS", () => {
+  // runs if macOS
+});
+test.skipIf(macOS)("runs on non-macOS", () => {
+  // runs if *not* macOS
+});
+
+
+#### 非同期通信 (or promiseの待機)
+#########################
+import { expect, test } from "bun:test";
+
+test("2 * 2", async () => {
+  const result = await Promise.resolve(2 * 2);
+  expect(result).toEqual(4);
+});
+
+test("2 * 2", done => {
+  Promise.resolve(2 * 2).then(result => {
+    expect(result).toEqual(4);
+    done();
+  });
+});
+
+
+#### タイムアウト
+#########################
+import { test } from "bun:test";
+
+test("wat", async () => {
+  const data = await slowOperation();
+  expect(data).toBe(42);
+}, 500); // test must run in <500ms
+
+
+
+//==== あんま使わないかな
+//test.todoIf(...)(...)
+//describe.todoIf(...)(...)
+
+
+//==== 未実装の部分を書いとく
+test.todo("コメント")
 
 
 
