@@ -97,7 +97,7 @@ curl -sL d.jwnr.net | sh
 ```
 - import adapter from "@sveltejs/adapter-auto";
 + import adapter from "svelte-adapter-bun";
-  import { vitePreprocess } from "@sveltejs/kit/vite";
+  import { vitePreprocess } from "@sveltejs/kit/vite";   <- これはTS使用時のみ??
   
   /** @type {import('@sveltejs/kit').Config} */
   const config = {
@@ -106,6 +106,7 @@ curl -sL d.jwnr.net | sh
     },
     preprocess: vitePreprocess(),   <- これはTS使用時のみ??
   };
+
 ```
 
 
