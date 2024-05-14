@@ -88,3 +88,27 @@ curl -sL d.jwnr.net | sh
 </svelte:head>
 
 ```
+
+## Bun + Sveltekit
+
+> bun add -D svelte-adapter-bun
+
+#### /svelte.config.js
+```
+- import adapter from "@sveltejs/adapter-auto";
++ import adapter from "svelte-adapter-bun";
+  import { vitePreprocess } from "@sveltejs/kit/vite";
+  
+  /** @type {import('@sveltejs/kit').Config} */
+  const config = {
+    kit: {
+      adapter: adapter(),
+    },
+    preprocess: vitePreprocess(),   <- これはTS使用時のみ??
+  };
+```
+
+
+
+
+
