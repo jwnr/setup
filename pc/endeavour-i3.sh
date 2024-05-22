@@ -36,6 +36,8 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 
 # ==== yay
 # ==================================
+pacman -R yay
+echo $pswd | sudo -S pacman -R --noconfirm yay
 cd ~/;git clone https://aur.archlinux.org/yay-bin.git yay-bin;cd yay-bin
 makepkg -si --noconfirm;cd ../;rm -rf yay-bin
 sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
