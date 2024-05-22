@@ -1,11 +1,13 @@
 ## PCセットアップ
 ```
-## セットアップ [root実行 ※sudoではなく]
-curl -sL s.jwnr.net/mjr-i3 | sh
+## セットアップ
+curl -sL s.jwnr.net > su.sh
+chmod +x su.sh
+./su.sh
 
 
 ## ドットファイルデプロイ [ユーザー実行]
-curl -sL d.jwnr.net | sh
+curl -sL d.jwnr.net > su.sh
 ```
 
 <br><br>
