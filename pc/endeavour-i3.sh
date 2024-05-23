@@ -48,8 +48,7 @@ sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 # rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
 echo $pswd | sudo -S pacman -R --noconfirm yay
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
-#echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
-echo $pswd | sudo -S pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm
+echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
 echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc
