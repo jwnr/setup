@@ -2,7 +2,7 @@
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 echo -e '\n********************************************************'
-echo -e '  + This script should be executed by normal user.\n\n  + This shell cannot pipe to "| sh" so download and execute.\n  + You need to do 2 tasks before this shell.\n        1. sudo xx (and hit pass)\n        2. yay -S pamac-aur'
+echo -e '  + This script should be executed by normal user.\n  + Do not pipe to "| sh", download and execute.\n  + You need to do 2 tasks before this shell.\n        1. sudo xx (and hit pass)\n        2. yay -S pamac-aur'
 echo -e '********************************************************\n'
 
 read -sp "Enter root password: " pswd
