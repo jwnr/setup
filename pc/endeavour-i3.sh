@@ -2,7 +2,7 @@
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 echo -e '\n*****************************************************'
-echo -e '  + You need to do "sudo xx" before this shell.\n        Have you done it?\n  + This shell cannot pipe to "| sh".\n        Download and execute, ok?.'
+echo -e '  + You need to do 2 tasks before this shell.\n        1. sudo xx (and hit pass)\n        2. yay -S pamac-aur\n  + This shell cannot pipe to "| sh".\n        Download and execute, ok?'
 echo -e '*****************************************************\n'
 
 read -sp "Enter root password: " pswd
@@ -34,7 +34,7 @@ echo $pswd | sudo -S sh -c 'eos-rankmirrors --sort age && eos-update --yay'
 echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
 
 
-# ==== yay
+# ==== package manager
 # ==================================
 echo $pswd | sudo -S pacman -R --noconfirm yay
 cd ~/;git clone https://aur.archlinux.org/yay-bin.git yay-bin;cd yay-bin
@@ -46,7 +46,6 @@ sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
-echo $pswd | sudo -S pacman -R --noconfirm yay
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
