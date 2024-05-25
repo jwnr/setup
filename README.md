@@ -1,13 +1,9 @@
 ## PCセットアップ
 ```
 ## セットアップ
-curl -sL s.jwnr.net > su.sh
+curl -sL xxx.xxx > su.sh
 chmod +x su.sh
 ./su.sh
-
-
-## ドットファイルデプロイ [ユーザー実行]
-curl -sL d.jwnr.net > su.sh
 ```
 
 <br><br>
