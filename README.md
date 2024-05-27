@@ -197,9 +197,13 @@ test.skip("asdfasdf", ()=>{...})
 
 #### /src/app.html
 ```
-<html lang="en">
-  ↓
-<html lang="ja">
+- <html lang="en">
++ <html lang="ja">
+
+
++ <link rel="stylesheet" href="%sveltekit.assets%/reset.css">
++ <link rel="stylesheet" href="%sveltekit.assets%/common.css">
+
 
 <meta name="author" content="xxxx">
 
