@@ -1,0 +1,51 @@
+@charset 'utf-8';
+
+/* リセット
+=========================================================
+========================================================= */
+html,body,h1,h2,h3,h4,h5,h6,
+section,article,menu,figure,ul,li,dd,dt,
+div,p,span,a,small,img{
+  margin:0;padding:0;border:0;
+}
+a:link{
+  text-decoration: none;
+  color:#449;
+}
+a:visited{
+  color:#449;
+}
+li{
+  list-style-type:none;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  appearance: textfield !important;
+  margin: 0 !important;
+}
+
+
+
+/* 全体
+=========================================================
+========================================================= */
+
+/* フォント
+======================================= */
+html{
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+  /* font-size: calc(11px + .3vw); */
+}
+@media screen and (min-width:2000px){html{font-size: 16px;}}
+@media screen and (min-width:1400px) and (max-width:1999px){html{font-size: 14px;}}
+@media screen and (max-width:1399px){html{font-size: 12px;}}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"]{
+  font-size: 1rem;
+  /* font-family: ; */
+}
+
