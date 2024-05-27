@@ -1,0 +1,95 @@
+
+/* 共通レイアウト
+======================================= */
+.fcc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fsc{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.fec{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.fcs{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.fce{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.crsrp{
+  cursor: pointer;
+}
+.crsrd{
+  cursor: default;
+}
+.crsrg{
+  cursor: grab;
+}
+
+
+/* 上限幅設定
+======================================= */
+.in{
+  width: 90vw;
+  max-width: 1330px;
+  margin-right:  auto;
+}
+@media screen and (min-width: 1400px){
+  .in{margin-left:  calc((100vw - 1330px) / 2)}
+}
+@media screen and (max-width: 1399px){
+  .in{margin-left:  5vw}
+}
+
+
+/* スクロールバー
+======================================= */
+*::-webkit-scrollbar{
+  width: 6px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track{
+  background-color: #e2e8e0;
+}
+*::-webkit-scrollbar-thumb{
+  background-color: #666;
+  border-radius: 9em;
+}
+
+
+/* webフォント・アイコン
+======================================= */
+.material-icons-sharp {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
