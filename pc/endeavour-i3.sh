@@ -45,7 +45,7 @@ sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 # ==== packages
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
-# rxvt-unicode dolphin rofi webp-pixbuf-loader flameshot
+# rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
