@@ -8,72 +8,10 @@ select OS in 'EndeavourOS-i3wm' 'Manjaro-i3wm' 'cancel'
 
 do
   if [ $REPLY -eq 1 ]; then
-    # ==== mirror config
-    # ==================================
-    sed -i -e 's/^.*VerbosePkgLists.*$/#VerbosePkgLists/' /etc/pacman.conf
-    reflector -l 16 -c JP,SG,TW --sort country -p https,rsync && pacman --noconfirm -Syyu
-    eos-rankmirrors --sort age && eos-update --yay
-
-    # ==== locale, time
-    # ==================================
-    sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
-
-    # ==== display
-    # ==================================
-    #pacman -S sddm
-    #systemctl enable sddm
-
-    # ==== packs
-    # ==================================
-    # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
-    # rxvt-unicode dolphin rofi
-    #pacman -R --noconfirm ~~~
-    pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
-    pacman -S --needed --noconfirm git nodejs npm; npm update -g npm
-    pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs fcitx5-im fcitx5-mozc
-    yay -S --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-    pacman --noconfirm -Scc; yay --noconfirm -Scc
-    #xdg-mime default microsoft-edge.desktop x-scheme-handler/http
-    #xdg-mime default microsoft-edge.desktop x-scheme-handler/https
-
-    #== fcitx設定
-    echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
 
     break
 
   elif [ $REPLY -eq 2]; then
-    # ==== mirror config
-    # ==================================
-    sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
-    sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-    pacman-mirrors -c Japan,Taiwan,Singapore && pacman --noconfirm -Syyu
-
-    # ==== locale, time
-    # ==================================
-    sed -i -e 's/^.*ja_JP.UTF-8.*$/ja_JP.UTF-8 UTF-8/' /etc/locale.gen; locale-gen
-    sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
-    timedatectl set-ntp true
-    #systemctl enable systemd-timesyncd
-    #ntpdate ntp.nict.jp
-
-    # ==== display
-    # ==================================
-    cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
-    mkdir /etc/lightdm/sl; chmod 777 /etc/lightdm/sl
-    touch /etc/lightdm/sl/default.sh; chmod 755 /etc/lightdm/sl/default.sh; ln -snf /etc/lightdm/sl/default.sh /etc/lightdm/sl/sl.sh
-    sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
-
-    # ==== packs
-    # ==================================
-    # neovim jq nodejs-lts nodejs-lts-gallium bun
-    pacman -R --noconfirm clipit palemoon pcmanfm
-    pacman -S --needed --noconfirm unzip unrar webp-pixbuf-loader flameshot
-    pacman -S --needed --noconfirm git nodejs npm deno; npm update -g npm; deno upgrade
-    pacman -S --needed --noconfirm rxvt-unicode vivaldi vivaldi-ffmpeg-codecs dolphin rofi fcitx fcitx-configtool fcitx-mozc fcitx-qt5 fcitx-gtk3; chmod -R 777 /usr/share/fcitx/skin/default /usr/share/fcitx/mozc/icon
-    pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-    pacman -Scc; pamac clean
-    xdg-mime default microsoft-edge.desktop x-scheme-handler/http
-    xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 
     break
 
@@ -81,15 +19,6 @@ do
     break
   fi
 
-  # ==== fonts
-  # ==================================
-  pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
-  ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-  ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-
-  # ==== hosts customize for Edge
-  # ==================================
-  echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts
   
 done
 

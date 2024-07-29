@@ -2,15 +2,15 @@
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 echo -e '\n********************************************************'
-echo -e '  + This script should be executed by normal user.\n  + Do not pipe to "| sh", download and execute.\n  + You need to do 2 tasks before this shell.\n        1. sudo xx (and hit pass)\n        2. yay -S --noconfirm pamac-aur'
+echo -e '  + This script should be executed by normal user.\n  + Do not pipe to "| sh", download and execute.\n  + You need to do this task before this shell.\n        1. sudo xx (and enter passwd)'
 echo -e '********************************************************\n'
 
 read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
-cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git'
+cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
 # == SSH
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
@@ -26,30 +26,46 @@ echo -e "\n==== command started =======================================\n"
 #   - ParallelDownloads = 5
 #   - Color
 #   - ILoveCandy
-echo $pswd | sudo -S sh -c 'reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score && pacman --noconfirm -Syyu'
-echo $pswd | sudo -S sh -c 'eos-rankmirrors --sort age && eos-update --yay'
+echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
+# eos-rankmirrors --sort age ... when manage packages with eos, use this mirror-rank
+# eos-update --yay ... update packages through eos with yay
 
 # ==== locale, time
 # ==================================
-echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf; source /etc/locale.conf
+echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+echo $pswd | sudo -S source /etc/locale.conf
 
 
 # ==== package manager
 # ==================================
 echo $pswd | sudo -S pacman -R --noconfirm yay
-cd ~/;git clone https://aur.archlinux.org/yay-bin.git yay-bin;cd yay-bin
-makepkg -si --noconfirm;cd ../;rm -rf yay-bin
+cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin; cd yay-bin
+makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
+
+# == if install aur packages with pamac
+#yay -S --sudoloop --noconfirm pamac-aur
+
+
+# ==== remove packages & update
+# ==================================
+#echo $pswd | sudo -S pacman -R --noconfirm xxxx
+yay --noconfirm -Sua
+#pacman --noconfirm -Syyu
+
 
 # ==== packages
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
+# vivaldi vivaldi-ffmpeg-codecs
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
-echo $pswd | sudo -S pacman -S --needed --noconfirm vivaldi vivaldi-ffmpeg-codecs
-echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+#echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
 # ==== default browser
@@ -64,6 +80,8 @@ echo $pswd | sudo -S pacman --noconfirm -Scc
 #xdg-settings set default-web-browser xxxx.desktop
 ## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
 #~/.config/mimeapps.list
+echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
+echo $pswd | sudo -S xdg-settings set default-web-browser microsoft-edge.desktop
 echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 
@@ -88,6 +106,15 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 # ==== display
 # ==================================
+#pacman -S sddm
+#systemctl enable sddm
+
+#cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
+#mkdir /etc/lightdm/sl; chmod 777 /etc/lightdm/sl
+#touch /etc/lightdm/sl/default.sh; chmod 755 /etc/lightdm/sl/default.sh; ln -snf /etc/lightdm/sl/default.sh /etc/lightdm/sl/sl.sh
+#sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
+
+
 
 # == i3wm
 # ==================================
