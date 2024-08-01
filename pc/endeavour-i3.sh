@@ -9,7 +9,7 @@ read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
-echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm git'
+echo $pswd | sudo pacman -S --needed --noconfirm git
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
 # == SSH
@@ -28,6 +28,9 @@ echo -e "\n==== command started =======================================\n"
 #   - ILoveCandy
 echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*Color$/d' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy.*$/d' /etc/pacman.conf
+echo $pswd | sudo -S sh -c 'echo -e \\nColor\\nILoveCandy >> /etc/ssh/sshd_config'
 echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 # eos-rankmirrors --sort age ... when manage packages with eos, use this mirror-rank
 # eos-update --yay ... update packages through eos with yay
@@ -38,23 +41,25 @@ echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 echo $pswd | sudo -S source /etc/locale.conf
 
 
-# ==== package manager
+# ==== remove packages & update
 # ==================================
-echo $pswd | sudo -S pacman -R --noconfirm yay
-cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin; cd yay-bin
-makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
-sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
+#echo $pswd | sudo -S pacman --noconfirm -R xxxx
+echo $pswd | sudo -S pacman --noconfirm -Syyu
+
+
+# ==== AUR package manager
+# ==================================
+echo $pswd | sudo -S pacman --noconfirm -R yay
+echo $pswd | sudo -S pacman --noconfirm -S debugedit
+cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
+cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
+echo $pswd | sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
+echo $pswd | sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
+yay --noconfirm -Sya
 
 # == if install aur packages with pamac
 #yay -S --sudoloop --noconfirm pamac-aur
 
-
-# ==== remove packages & update
-# ==================================
-#echo $pswd | sudo -S pacman -R --noconfirm xxxx
-yay --noconfirm -Sua
-#pacman --noconfirm -Syyu
 
 
 # ==== packages
@@ -62,11 +67,12 @@ yay --noconfirm -Sua
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
 # vivaldi vivaldi-ffmpeg-codecs
-echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar fcitx5-im fcitx5-mozc
-echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
-#echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+#echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
+echo $pswd | sudo -S yay --noconfirm -Scc
 
 # ==== default browser
 # ==================================
@@ -81,7 +87,7 @@ echo $pswd | sudo -S pacman --noconfirm -Scc
 ## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
 #~/.config/mimeapps.list
 echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
-echo $pswd | sudo -S xdg-settings set default-web-browser microsoft-edge.desktop
+#echo $pswd | sudo -S xdg-settings set default-web-browser microsoft-edge.desktop
 echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 
