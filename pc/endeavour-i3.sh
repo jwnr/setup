@@ -55,7 +55,7 @@ cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 echo $pswd | sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 echo $pswd | sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
-yay --noconfirm -Sya
+yay --noconfirm -Syua
 
 # == if install aur packages with pamac
 #yay -S --sudoloop --noconfirm pamac-aur
@@ -124,8 +124,8 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 # == i3wm
 # ==================================
-cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/end/dir/.config/i3/config ~/.config/i3/config
-cp -f ~/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf_bak; ln -snf ~/dots/end/dir/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
+#cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/end/dir/.config/i3/config ~/.config/i3/config
+#cp -f ~/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf_bak; ln -snf ~/dots/end/dir/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 
 # ==== other setting
 # ==================================
@@ -134,11 +134,11 @@ echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n1
 # GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 # terminal
-echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
+#echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
 # keymap
 cp ~/dots/.Xmodmap ~/
 # wallpaper
-cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
+#cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
 
 echo -e "\n==== succeeded ============================================="
