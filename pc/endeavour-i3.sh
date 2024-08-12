@@ -28,8 +28,8 @@ echo -e "\n==== command started =======================================\n"
 #   - ILoveCandy
 echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*Color$/d' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy.*$/d' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e '/^.*Color$/d' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e '/^.*ILoveCandy.*$/d' /etc/pacman.conf
 echo $pswd | sudo -S sh -c 'echo -e \\nColor\\nILoveCandy >> /etc/ssh/sshd_config'
 echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 # eos-rankmirrors --sort age ... when manage packages with eos, use this mirror-rank
@@ -53,8 +53,8 @@ echo $pswd | sudo -S pacman --noconfirm -R yay
 echo $pswd | sudo -S pacman --noconfirm -S debugedit
 cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-echo $pswd | sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
-echo $pswd | sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
+echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
+echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 yay --noconfirm -Syua
 
 # == if install aur packages with pamac
