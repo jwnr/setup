@@ -9,7 +9,7 @@ read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
-echo $pswd | sudo pacman -S --needed --noconfirm git reflector
+echo $pswd | sudo pacman -S --needed --noconfirm git reflector rsync
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
 # == SSH
