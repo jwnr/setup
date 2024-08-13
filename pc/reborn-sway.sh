@@ -9,7 +9,7 @@ read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
-echo $pswd | sudo pacman -S --needed --noconfirm git reflector rsync
+echo $pswd | sudo pacman -S --needed --noconfirm git rsync reflector
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
 # == SSH
@@ -64,7 +64,7 @@ yay --noconfirm -Syua
 # fossil
 # vivaldi vivaldi-ffmpeg-codecs
 yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc remmina freerdp freerdp2
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 echo $pswd | sudo -S yay --noconfirm -Scc
