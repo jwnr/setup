@@ -91,7 +91,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handle
 echo $pswd | sudo -S pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
 echo $pswd | sudo -S ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 echo $pswd | sudo -S ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-cp -rf ~/dots/files/fonts ~/.local/share/
+mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/
 mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 fc-cache -fv
 
@@ -116,11 +116,9 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 #sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
 
 
-
 # == i3wm
 # ==================================
-#cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/end/dir/.config/i3/config ~/.config/i3/config
-#cp -f ~/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf_bak; ln -snf ~/dots/end/dir/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
+cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_rbn/i3/config ~/.config/i3/config
 
 # ==== other setting
 # ==================================
@@ -133,7 +131,7 @@ echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 # keymap
 cp ~/dots/.Xmodmap ~/
 # wallpaper
-#cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
+cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
 
 echo -e "\n==== succeeded ============================================="
