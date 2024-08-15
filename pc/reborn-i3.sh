@@ -61,10 +61,10 @@ yay --noconfirm -Syua
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
-# fossil
+# fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
-echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc remmina freerdp freerdp2
+echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc vi
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 echo $pswd | sudo -S yay --noconfirm -Scc
@@ -126,8 +126,6 @@ cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_rbn/i3/config
 echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts'
 # GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
-# terminal
-#echo -e "\n#==== my commands ====\nexport TERM=xterm-256color" >> ~/.bashrc
 # keymap
 cp ~/dots/.Xmodmap ~/
 # wallpaper
