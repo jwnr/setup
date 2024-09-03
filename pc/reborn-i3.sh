@@ -9,6 +9,7 @@ read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
+echo $pswd | sudo pacman -Syy
 echo $pswd | sudo pacman -S --needed --noconfirm git rsync reflector
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
@@ -31,6 +32,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/
 echo $pswd | sudo -S sed -i -e '/^.*Color$/d' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e '/^.*ILoveCandy.*$/d' /etc/pacman.conf
 echo $pswd | sudo -S sh -c 'echo -e \\nColor\\nILoveCandy >> /etc/ssh/sshd_config'
+echo $pswd | sudo pacman -S --needed --noconfirm reflector
 echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 
 
@@ -43,7 +45,7 @@ echo $pswd | sudo -S source /etc/locale.conf
 # ==== remove packages & update
 # ==================================
 #echo $pswd | sudo -S pacman --noconfirm -R xxxx
-echo $pswd | sudo -S pacman --noconfirm -Syyu
+echo $pswd | sudo -S pacman --noconfirm -Su
 
 
 # ==== AUR package manager
@@ -54,7 +56,7 @@ cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
-yay --noconfirm -Syua
+yay --sudoloop --noconfirm -Syua
 
 
 # ==== packages
@@ -63,11 +65,11 @@ yay --noconfirm -Syua
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
-yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+yay -Sa --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc vi
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
-echo $pswd | sudo -S yay --noconfirm -Scc
+yay --noconfirm -Scc
 
 # ==== default browser
 # ==================================
