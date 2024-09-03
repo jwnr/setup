@@ -49,7 +49,7 @@ echo $pswd | sudo -S pacman --noconfirm -Syyu
 # ==== AUR package manager
 # ==================================
 echo $pswd | sudo -S pacman --noconfirm -R yay
-echo $pswd | sudo -S pacman --noconfirm -S debugedit
+echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
 cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
