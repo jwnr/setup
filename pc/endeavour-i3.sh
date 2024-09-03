@@ -9,6 +9,7 @@ read -sp "Enter root password: " pswd
 echo
 
 # == get key files & dotfiles
+echo $pswd | sudo pacman -Syy
 echo $pswd | sudo pacman -S --needed --noconfirm git
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
@@ -31,6 +32,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/
 echo $pswd | sudo -S sed -i -e '/^.*Color$/d' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e '/^.*ILoveCandy.*$/d' /etc/pacman.conf
 echo $pswd | sudo -S sh -c 'echo -e \\nColor\\nILoveCandy >> /etc/ssh/sshd_config'
+echo $pswd | sudo pacman -S --needed --noconfirm reflector
 echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 # eos-rankmirrors --sort age ... when manage packages with eos, use this mirror-rank
 # eos-update --yay ... update packages through eos with yay
@@ -44,18 +46,18 @@ echo $pswd | sudo -S source /etc/locale.conf
 # ==== remove packages & update
 # ==================================
 #echo $pswd | sudo -S pacman --noconfirm -R xxxx
-echo $pswd | sudo -S pacman --noconfirm -Syyu
+echo $pswd | sudo -S pacman --noconfirm -Su
 
 
 # ==== AUR package manager
 # ==================================
 echo $pswd | sudo -S pacman --noconfirm -R yay
-echo $pswd | sudo -S pacman --noconfirm -S debugedit
+echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
 cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
-yay --noconfirm -Syua
+yay --sudoloop --noconfirm -Syua
 
 # == if install aur packages with pamac
 #yay -S --sudoloop --noconfirm pamac-aur
@@ -67,12 +69,12 @@ yay --noconfirm -Syua
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
 # vivaldi vivaldi-ffmpeg-codecs
-yay -Sa --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
+yay -Sa --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 #echo $pswd | sudo -S pamac build --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin
 echo $pswd | sudo -S pacman -S --needed --noconfirm unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm fossil nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
-echo $pswd | sudo -S yay --noconfirm -Scc
+yay --noconfirm -Scc
 
 # ==== default browser
 # ==================================
