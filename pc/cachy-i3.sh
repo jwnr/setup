@@ -126,7 +126,7 @@ echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n1
 # GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
 # keymap
-cp ~/dots/.Xmodmap ~/
+#cp ~/dots/.Xmodmap ~/
 # wallpaper
 cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
