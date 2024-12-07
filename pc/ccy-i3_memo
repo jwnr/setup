@@ -1,0 +1,29 @@
+
+## @install
+- cachy
+  - repositry
+  - cachy-browser
+  - wallpaper
+- application
+  - nanoxxx -> off
+  - wget -> off
+  - vim -> off
+- Base Common
+  - fonts -> off
+
+
+## apps
+- Dev
+  - MySQL Workbench
+  - draw.io
+- Engineering
+  - kicad, kicad-library, kicad-library-3d
+  - freecad
+  - bambustudio
+- Opt
+  - GnuCash
+
+- Tilda
+- Octopi  GUI aur manager
+- Meld
+
