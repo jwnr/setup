@@ -31,7 +31,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/p
 echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
-
+echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 
 # ==== locale, time
 # ==================================
@@ -41,19 +41,19 @@ echo $pswd | sudo -S source /etc/locale.conf
 
 # ==== remove packages & update
 # ==================================
-echo $pswd | sudo -S pacman --noconfirm -R vim nano firefox cachy-browser
+echo $pswd | sudo -S pacman --noconfirm -R vim nano micro wget firefox cachy-browser
 echo $pswd | sudo -S pacman --noconfirm -Su
 
 
 # ==== AUR package manager
 # ==================================
-echo $pswd | sudo -S pacman --noconfirm -R yay
-echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
-cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
-cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
+#echo $pswd | sudo -S pacman --noconfirm -R yay
+#echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
+#cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
+#cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
 echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
-yay --sudoloop --noconfirm -Syua
+#yay --sudoloop --noconfirm -Syua
 
 
 # ==== packages
@@ -62,7 +62,7 @@ yay --sudoloop --noconfirm -Syua
 # rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
-yay -Sa --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+paru --skipreview --sudoloop google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
 echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
