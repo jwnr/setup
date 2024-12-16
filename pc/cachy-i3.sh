@@ -63,7 +63,7 @@ echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 paru --skipreview --sudoloop google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
-echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc dolphin
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 yay --noconfirm -Scc
@@ -121,14 +121,28 @@ cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_ccy/i3/config
 
 # ==== other setting
 # ==================================
-# hosts customize for Edge
-echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n127.0.0.1 api.msn.com\\n >> /etc/hosts'
-# GitHub
+
+## file manager
+cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
+
+
+## hosts customize for Edge
+#127.0.0.1 browser.events.data.msn.com
+#127.0.0.1 c.msn.com
+#127.0.0.1 sb.scorecardresearch.com
+#127.0.0.1 api.msn.com   <- stopping
+echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts'
+
+## GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
-# keymap
+
+## keymap
 #cp ~/dots/.Xmodmap ~/
-# wallpaper
+
+## wallpaper
 cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
+
+# ==================================
 
 
 echo -e "\n==== succeeded ============================================="
