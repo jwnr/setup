@@ -27,10 +27,10 @@ echo -e "\n==== command started =======================================\n"
 #   - ParallelDownloads = 5
 #   - Color
 #   - ILoveCandy
-echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
+#echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+#echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+#echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
+#echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
 
 # ==== locale, time
@@ -51,22 +51,25 @@ echo $pswd | sudo -S pacman --noconfirm -Su
 #echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
 #cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 #cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
-echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
+#??echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
+#??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 #yay --sudoloop --noconfirm -Syua
 
 
 # ==== packages
 # ==================================
 # neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
-# rxvt-unicode dolphin pcmanfm rofi webp-pixbuf-loader flameshot Viewnior mupdf
+# rxvt-unicode rofi webp-pixbuf-loader flameshot
+# dolphin pcmanfm
+# viewnior mupdf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 paru --skipreview --sudoloop google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
 echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc dolphin
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
-yay --noconfirm -Scc
+paru --noconfirm -Scc
+#yay --noconfirm -Scc
 
 # ==== default browser
 # ==================================
