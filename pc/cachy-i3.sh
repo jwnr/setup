@@ -65,7 +65,7 @@ echo $pswd | sudo -S pacman --noconfirm -Su
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 paru --skipreview --sudoloop google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
-echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc dolphin
+echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 paru --noconfirm -Scc
@@ -83,10 +83,10 @@ paru --noconfirm -Scc
 #xdg-settings set default-web-browser xxxx.desktop
 ## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
 #~/.config/mimeapps.list
-echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
+#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
 #echo $pswd | sudo -S xdg-settings set default-web-browser microsoft-edge.desktop
-echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
-echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
+#echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
+#echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 
 # ==== fonts
 # ==================================
@@ -120,13 +120,13 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 # == i3wm
 # ==================================
-cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_ccy/i3/config ~/.config/i3/config
+#cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_ccy/i3/config ~/.config/i3/config
 
 # ==== other setting
 # ==================================
 
 ## file manager
-cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
+#cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
 
 
 ## hosts customize for Edge
