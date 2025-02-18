@@ -45,7 +45,7 @@ echo $pswd | sudo -S pacman --noconfirm -R vim nano micro wget firefox cachy-bro
 echo $pswd | sudo -S pacman --noconfirm -Su
 
 
-# ==== AUR package manager
+# ==== yay (AUR package manager)
 # ==================================
 #echo $pswd | sudo -S pacman --noconfirm -R yay
 #echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
@@ -58,14 +58,15 @@ echo $pswd | sudo -S pacman --noconfirm -Su
 
 # ==== packages
 # ==================================
-# neovim jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
+# jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # rxvt-unicode rofi webp-pixbuf-loader flameshot
 # dolphin pcmanfm
 # viewnior mupdf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
-paru -S --skipreview --sudoloop google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
 echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 paru --noconfirm -Scc
@@ -127,7 +128,6 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 ## file manager
 #cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
-
 
 ## hosts customize for Edge
 #127.0.0.1 browser.events.data.msn.com
