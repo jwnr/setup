@@ -103,8 +103,11 @@ fc-cache -fv
 # /usr/share/icons/hicolor/00x00/apps/
 # 32 48 128
 echo $pswd | sudo -S sh -c 'echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile'
-mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/icon/* /tmp/zxcv/
-echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/* /usr/share/icons/hicolor/32x32/apps/'
+mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/* /tmp/zxcv/
+#echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/'
+echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon32/* /usr/share/icons/hicolor/32x32/apps/'
+echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/'
+echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/'
 rm -rf /tmp/zxcv
 rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
 rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
