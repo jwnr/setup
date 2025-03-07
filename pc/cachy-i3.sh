@@ -126,6 +126,11 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 # ==================================
 #cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_ccy/i3/config ~/.config/i3/config
 
+# == budgie
+# ==================================
+#cp -f ~/dots/ccy/budgie/dconf ~/.config/dconf; ln -snf ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
+cp -f ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
+
 # ==== other setting
 # ==================================
 
