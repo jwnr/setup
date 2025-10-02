@@ -45,15 +45,18 @@ echo $pswd | sudo -S pacman --noconfirm -R vim nano micro wget firefox cachy-bro
 echo $pswd | sudo -S pacman --noconfirm -Su
 
 
-# ==== yay (AUR package manager)
+# ==== AUR package manager
 # ==================================
+# == yay
 #echo $pswd | sudo -S pacman --noconfirm -R yay
 #echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
 #cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
 #cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
+#yay --sudoloop --noconfirm -Syua
+# == paru
+# ????
 #??echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 #??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
-#yay --sudoloop --noconfirm -Syua
 
 
 # ==== packages
@@ -64,12 +67,16 @@ echo $pswd | sudo -S pacman --noconfirm -Su
 # viewnior mupdf
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
-paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+
+#paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+#yay -S --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+
 echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
-paru --noconfirm -Scc
+
+#paru --noconfirm -Scc
 #yay --noconfirm -Scc
 
 # ==== default browser
