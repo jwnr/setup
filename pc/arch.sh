@@ -38,7 +38,6 @@ else
   echo $pswd | sudo pacman -S --needed --noconfirm git reflector
 fi
 echo $pswd | sudo -S pacman --noconfirm -R vim nano micro firefox cachy-browser
-echo $pswd | sudo -S pacman --noconfirm -Su
 
 
 # ==== get key files & dotfiles
@@ -47,10 +46,6 @@ git clone git@github.com:jwnr/dots.git
 # ==== SSH
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
-# ==== locale, time
-echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
-echo $pswd | sudo -S source /etc/locale.conf
-
 
 
 echo -e "\n==== ranking mirrors =======================================\n"
@@ -91,6 +86,13 @@ fi
 #??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 
 
+echo -e "\n==== locale, time ==========================================\n"
+# ==== locale, time
+echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+echo $pswd | sudo -S source /etc/locale.conf
+
+
+echo -e "\n==== packages ==============================================\n"
 # ==== packages
 # ==================================
 # jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
@@ -106,13 +108,13 @@ echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm updat
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
 if [ $dstp -eq 1 ]; then
-  yay -S --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  yay -S --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   yay --noconfirm -Scc
 elif [ $dstp -eq 2 ]; then
-  pamac install --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  pamac install --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
-  paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   paru --noconfirm -Scc
 fi
 
