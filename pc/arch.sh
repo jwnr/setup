@@ -2,58 +2,90 @@
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
 echo -e '\n********************************************************'
-echo -e '  + This script should be executed by normal user.\n  + Do not pipe to "| sh", download and execute.\n  + You need to do this task before this shell.\n        1. sudo xx (and enter passwd)'
+echo -e ' + This script should be executed by normal user.\n + Do not pipe to "| sh", download and execute.\n + Before execute this shell, do such command once.\n        sudo xx (and enter passwd)'
 echo -e '********************************************************\n'
 
-read -sp "Enter root password: " pswd
-echo
 
-# == get key files & dotfiles
+
+PS3="Select repository type (q=quit): "
+options=("Arch, EndeavourOS, Artix" "Manjaro, Mabox" "CachyOS")
+select opt in "${options[@]}"; do
+  case "$REPLY" in
+    q) break ;;
+    '' ) echo "error" ;;
+    *[!1-3]* ) echo " invalid value" ;;
+    *)
+      if (( REPLY >= 1 && REPLY <= ${#options[@]} )); then
+        dstp=$REPLY
+        echo
+        break
+      else
+        echo " invalid value"
+      fi
+      ;;
+  esac
+done
+
+read -sp "Enter root password: " pswd
+
+echo -e "\n\n==== preparing =============================================\n"
+
+# ==== essential packages & update
 echo $pswd | sudo pacman -Syy
-echo $pswd | sudo pacman -S --needed --noconfirm git
+if [ $dstp -eq 2 ]; then
+  echo $pswd | sudo pacman -S --needed --noconfirm git pacman-mirrors
+else
+  echo $pswd | sudo pacman -S --needed --noconfirm git reflector
+fi
+echo $pswd | sudo -S pacman --noconfirm -R vim nano micro firefox cachy-browser
+echo $pswd | sudo -S pacman --noconfirm -Su
+
+
+# ==== get key files & dotfiles
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
 git clone git@github.com:jwnr/dots.git
-# == SSH
+# ==== SSH
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
-
-echo -e "\n==== command started =======================================\n"
-
-
-# ==== mirror config
-# ==================================
-# /etc/pacman.conf
-#   - VerbosePkgLists
-#   - ParallelDownloads = 5
-#   - Color
-#   - ILoveCandy
-#echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
-#echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-#echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
-#echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
-echo $pswd | sudo -S reflector -l 16 -a 24 -c JP,TW,IN,KR -p https,rsync --sort score
-
 # ==== locale, time
-# ==================================
 echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 echo $pswd | sudo -S source /etc/locale.conf
 
 
-# ==== remove packages & update
-# ==================================
-echo $pswd | sudo -S pacman --noconfirm -R vim nano micro wget firefox cachy-browser
-echo $pswd | sudo -S pacman --noconfirm -Su
+
+echo -e "\n==== ranking mirrors =======================================\n"
+
+# ==== mirror config
+# /etc/pacman.conf
+#   - VerbosePkgLists    - ParallelDownloads = 5
+#   - Color              - ILoveCandy
+echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
+echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
+
+if [ $dstp -eq 2 ]; then
+  echo $pswd | sudo -S pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
+  # echo $pswd | sudo -S pacman-mirrors --fasttrack 8 --api --proto https
+else
+  echo $pswd | sudo -S reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
+fi
 
 
-# ==== AUR package manager
-# ==================================
-# == yay
-#echo $pswd | sudo -S pacman --noconfirm -R yay
-#echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
-#cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
-#cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-#yay --sudoloop --noconfirm -Syua
-# == paru
+echo -e "\n==== AUR package manager ===================================\n"
+
+if [ $dstp -eq 1 ]; then
+  echo $pswd | sudo -S pacman --noconfirm -R yay
+  echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
+  cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
+  cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
+  yay --sudoloop --noconfirm -Syua
+elif [ $dstp -eq 2 ]; then
+  pamac update --no-confirm --aur
+else
+  paru --noconfirm
+fi
+
 # ????
 #??echo $pswd | sudo -S sed -i -e 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -z -T0 -)/' /etc/makepkg.conf
 #??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
@@ -68,16 +100,22 @@ echo $pswd | sudo -S pacman --noconfirm -Su
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 
-#paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
-#yay -S --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
-
 echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
-#paru --noconfirm -Scc
-#yay --noconfirm -Scc
+if [ $dstp -eq 1 ]; then
+  yay -S --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  yay --noconfirm -Scc
+elif [ $dstp -eq 2 ]; then
+  pamac install --no-confirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  pamac clean --no-confirm -u -b -k 1 
+else
+  paru -S --skipreview --sudoloop --noconfirm google-chrome google-chrome-beta microsoft-edge-stable-bin visual-studio-code-bin vivaldi vivaldi-ffmpeg-codecs
+  paru --noconfirm -Scc
+fi
+
 
 # ==== default browser
 # ==================================
@@ -136,11 +174,10 @@ rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 # == budgie
 # ==================================
 #cp -f ~/dots/ccy/budgie/dconf ~/.config/dconf; ln -snf ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
-cp -f ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
+#cp -f ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
 
 # ==== other setting
 # ==================================
-
 ## file manager
 #cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
 
