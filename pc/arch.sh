@@ -32,11 +32,7 @@ echo -e "\n\n==== preparing =============================================\n"
 
 # ==== essential packages & update
 echo $pswd | sudo pacman -Syy
-if [ $dstp -eq 2 ]; then
-  echo $pswd | sudo pacman -S --needed --noconfirm git pacman-mirrors
-else
-  echo $pswd | sudo pacman -S --needed --noconfirm git reflector
-fi
+echo $pswd | sudo pacman -S --needed --noconfirm git
 echo $pswd | sudo -S pacman --noconfirm -R vim nano micro firefox cachy-browser
 
 
@@ -58,6 +54,12 @@ echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/p
 echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
+
+if [ $dstp -eq 2 ]; then
+  echo $pswd | sudo pacman -S --needed --noconfirm pacman-mirrors
+else
+  echo $pswd | sudo pacman -S --needed --noconfirm reflector
+fi
 
 if [ $dstp -eq 2 ]; then
   echo $pswd | sudo -S pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
