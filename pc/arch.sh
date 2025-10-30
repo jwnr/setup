@@ -31,8 +31,8 @@ read -sp "Enter root password: " pswd
 echo -e "\n\n==== preparing =============================================\n"
 
 # ==== essential packages & update
-echo $pswd | sudo pacman -Syy
-echo $pswd | sudo pacman -S --needed --noconfirm git
+echo $pswd | sudo -S pacman -Syy
+echo $pswd | sudo -S pacman -S --needed --noconfirm git
 echo $pswd | sudo -S pacman --noconfirm -R vim nano micro firefox cachy-browser
 
 
@@ -56,9 +56,9 @@ echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 
 if [ $dstp -eq 2 ]; then
-  echo $pswd | sudo pacman -S --needed --noconfirm pacman-mirrors
+  echo $pswd | sudo -S pacman -S --needed --noconfirm pacman-mirrors
 else
-  echo $pswd | sudo pacman -S --needed --noconfirm reflector
+  echo $pswd | sudo -S pacman -S --needed --noconfirm reflector
 fi
 
 if [ $dstp -eq 2 ]; then
@@ -113,7 +113,7 @@ if [ $dstp -eq 1 ]; then
   yay -S --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   yay --noconfirm -Scc
 elif [ $dstp -eq 2 ]; then
-  pamac install --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
   paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
