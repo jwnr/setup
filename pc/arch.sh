@@ -110,21 +110,18 @@ echo -e "\n==== packages ==============================================\n"
 # ==== packages
 # ==================================
 # jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
+# gvfs ??
 # rxvt-unicode rofi webp-pixbuf-loader flameshot
 # dolphin pcmanfm
+# brave
+# vivaldi vivaldi-ffmpeg-codecs
 # viewnior mupdf
 # fossil remmina freerdp freerdp2
-# vivaldi vivaldi-ffmpeg-codecs
 
-#echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-#echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
-#echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
-#echo $pswd | sudo -S pacman --noconfirm -Scc
-
-yay -S --noconfirm --needed vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-yay -S --noconfirm --needed remmina freerdp gparted
-yay -S --noconfirm --needed nodejs npm; npm update -g npm
-yay --noconfirm -Scc
+echo $pswd | sudo -S pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+echo $pswd | sudo -S pacman -S --noconfirm --needed remmina freerdp gparted flameshot
+echo $pswd | sudo -S sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
+echo $pswd | sudo -S pacman --noconfirm -Scc
 
 if [ $dstp -eq 2 ]; then
   pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
