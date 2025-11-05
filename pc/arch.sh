@@ -55,7 +55,7 @@ if [ $dstp -eq 4 ]; then
   echo $pswd | sudo -S cp /etc/pacman.conf /etc/pacman.conf.arch
   echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n[community]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n | sudo tee -a /etc/pacman.conf.arch
   echo $pswd | sudo -S pacman-key --populate archlinux
-  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy
+  #echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy
 fi
 
 
@@ -69,7 +69,7 @@ echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 if [ $dstp -eq 2 ]; then
   echo $pswd | sudo -S pacman -S --needed --noconfirm pacman-mirrors
 elif [ $dstp -eq 4 ]; then
-  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -S --needed --noconfirm reflector
+  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy --noconfirm reflector
 else
   echo $pswd | sudo -S pacman -S --needed --noconfirm reflector
 fi
