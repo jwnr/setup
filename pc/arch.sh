@@ -33,7 +33,7 @@ echo -e "\n\n==== preparing =============================================\n"
 # ==== udate db (force)
 echo $pswd | sudo -S pacman -Syy
 # ==== install essential packages
-echo $pswd | sudo -S pacman -S --needed --noconfirm git base-devel
+echo $pswd | sudo -S pacman -S --noconfirm git base-devel
 # ==== remove packages
 echo $pswd | sudo -S pacman -R --noconfirm vim
 echo $pswd | sudo -S pacman -R --noconfirm nano
@@ -51,9 +51,9 @@ chmod 400 ~/dots/dir/.ssh/*/*
 
 # ==== [Artix] add Arch support
 if [ $dstp -eq 4 ]; then
-  echo $pswd | sudo -S pacman -S --needed --noconfirm artix-archlinux-support
+  echo $pswd | sudo -S pacman -S --noconfirm artix-archlinux-support
   echo $pswd | sudo -S cp /etc/pacman.conf /etc/pacman.conf.arch
-  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n[community]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n | sudo tee -a /etc/pacman.conf.arch
+  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\#[community]\\n\#Include = /etc/pacman.d/mirrorlist-arch\\n | sudo tee -a /etc/pacman.conf.arch
   echo $pswd | sudo -S pacman-key --populate archlinux
   #echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy
 fi
@@ -130,7 +130,7 @@ if [ $dstp -eq 2 ]; then
   pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
-  yay -S --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  yay -S --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   yay --noconfirm -Scc
 fi
 #paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
