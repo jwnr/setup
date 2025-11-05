@@ -33,7 +33,7 @@ echo -e "\n\n==== preparing =============================================\n"
 # ==== udate db (force)
 echo $pswd | sudo -S pacman -Syy
 # ==== install essential packages
-echo $pswd | sudo -S pacman -S --noconfirm --needed git base-devel
+echo $pswd | sudo -S pacman -S --noconfirm --needed git
 # ==== remove packages
 echo $pswd | sudo -S pacman -R --noconfirm vim
 echo $pswd | sudo -S pacman -R --noconfirm nano
@@ -89,7 +89,7 @@ if [ $dstp -eq 2 ]; then
   pamac update --no-confirm --aur
 else
   echo $pswd | sudo -S pacman -S --noconfirm yay
-  echo $pswd | sudo -S pacman -S --noconfirm --needed fakeroot debugedit
+  echo $pswd | sudo -S pacman -S --noconfirm --needed fakeroot base-devel debugedit
   cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
   cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
   yay -Sya --noconfirm --sudoloop --save
