@@ -49,10 +49,11 @@ git clone git@github.com:jwnr/dots.git
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
 
-# ==== [Artix] add Arch support 
+# ==== [Artix] add Arch support
 if [ $dstp -eq 4 ]; then
   echo $pswd | sudo -S pacman -S --needed --noconfirm artix-archlinux-support
-  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n[community]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n >> /etc/pacman.conf
+  echo $pswd | sudo -S cp /etc/pacman.conf /etc/pacman.conf.arch
+  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n[community]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n >> /etc/pacman.conf.arch
   echo $pswd | sudo -S pacman-key --populate archlinux
   echo $pswd | sudo -S pacman -Sy
 fi
@@ -67,6 +68,8 @@ echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 
 if [ $dstp -eq 2 ]; then
   echo $pswd | sudo -S pacman -S --needed --noconfirm pacman-mirrors
+elif [ $dstp -eq 4 ]; then
+  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -S --needed --noconfirm reflector
 else
   echo $pswd | sudo -S pacman -S --needed --noconfirm reflector
 fi
