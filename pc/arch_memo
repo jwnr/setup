@@ -1,3 +1,34 @@
+
+
+
+
+
+
+|             | AUR   | rank mirrors |    |
+|-------------+-------+--------------+----|
+| CachyOS     |    |    |    |
+| EndeavourOS |    |    |    |
+| Manjaro     |    |    |    |
+| Omarchy     |    |    |    |
+| Artix       |    |    |    |
+
+
+
+
+■ 初期AURチェック (yay paru pamac)
+■ AURインストールコマンドチェック
+ yay -S visual-studio-code-bin
+ paru -S visual-studio-code-bin
+ pamac build visual-studio-code-bin
+■ 
+■ 
+■ 
+
+
+
+
+
+
 smb://192.168.1.3
 
 ## @install
