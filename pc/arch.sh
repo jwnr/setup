@@ -123,10 +123,12 @@ echo $pswd | sudo -S pacman -S --noconfirm --needed remmina freerdp gparted flam
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
 if [ $dstp -eq 2 ]; then
-  pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  #pamac build --no-confirm microsoft-edge-stable-bin google-chrome visual-studio-code-bin
+  pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
-  yay -S --noconfirm --needed google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  #yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome visual-studio-code-bin
+  yay -S --noconfirm --needed brave-bin google-chrome visual-studio-code-bin
   yay --noconfirm -Scc
 fi
 #paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
