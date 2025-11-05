@@ -6,9 +6,8 @@ echo -e ' + This script should be executed by normal user.\n + Do not pipe to "|
 echo -e '********************************************************\n'
 
 
-
 PS3="Select repository type (q=quit): "
-options=("Arch, EndeavourOS, Artix" "Manjaro, Mabox" "CachyOS")
+options=("Arch, EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
 select opt in "${options[@]}"; do
   case "$REPLY" in
     q) break ;;
@@ -28,13 +27,20 @@ done
 
 read -sp "Enter root password: " pswd
 
+
 echo -e "\n\n==== preparing =============================================\n"
 
-# ==== essential packages & update
+# ==== udate db (force)
 echo $pswd | sudo -S pacman -Syy
-echo $pswd | sudo -S pacman -S --needed --noconfirm git
-echo $pswd | sudo -S pacman --noconfirm -R vim nano micro firefox cachy-browser
-
+# ==== install essential packages
+echo $pswd | sudo -S pacman -S --needed --noconfirm git base-devel
+# ==== remove packages
+echo $pswd | sudo -S pacman -R --noconfirm vim
+echo $pswd | sudo -S pacman -R --noconfirm nano
+echo $pswd | sudo -S pacman -R --noconfirm micro
+echo $pswd | sudo -S pacman -R --noconfirm firefox
+echo $pswd | sudo -S pacman -R --noconfirm cachy-browser
+echo $pswd | sudo -S pacman -R --noconfirm falkon
 
 # ==== get key files & dotfiles
 cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
@@ -43,13 +49,17 @@ git clone git@github.com:jwnr/dots.git
 rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
 chmod 400 ~/dots/dir/.ssh/*/*
 
+# ==== [Artix] add Arch support 
+if [ $dstp -eq 4 ]; then
+  echo $pswd | sudo -S pacman -S --needed --noconfirm artix-archlinux-support
+  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n[community]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n
+  echo $pswd | sudo -S pacman-key --populate archlinux
+  echo $pswd | sudo -S pacman -Sy
+fi
+
 
 echo -e "\n==== ranking mirrors =======================================\n"
 
-# ==== mirror config
-# /etc/pacman.conf
-#   - VerbosePkgLists    - ParallelDownloads = 5
-#   - Color              - ILoveCandy
 echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
@@ -77,6 +87,13 @@ if [ $dstp -eq 1 ]; then
   cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
   cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
   yay --sudoloop --noconfirm -Syua
+
+  echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
+  cd ~/; git clone https://aur.archlinux.org/paru-bin.git paru-bin
+  cd paru-bin; makepkg -si --noconfirm; cd ../; rm -rf paru-bin
+  paru --sudoloop --noconfirm -Syua
+
+
 elif [ $dstp -eq 2 ]; then
   pamac update --no-confirm --aur
 else
