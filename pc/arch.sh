@@ -111,11 +111,10 @@ echo -e "\n==== packages ==============================================\n"
 # ==================================
 # jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
 # gvfs ??
-# rxvt-unicode rofi webp-pixbuf-loader flameshot
+# rxvt-unicode rofi webp-pixbuf-loader
 # dolphin pcmanfm
-# brave
-# vivaldi vivaldi-ffmpeg-codecs
-# viewnior mupdf
+# brave    vivaldi vivaldi-ffmpeg-codecs
+# viewnior mupdf flameshot
 # fossil remmina freerdp freerdp2
 
 echo $pswd | sudo -S pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
@@ -133,23 +132,6 @@ fi
 #paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
 #paru --noconfirm -Scc
 
-
-# ==== default browser
-# ==================================
-# microsoft-edge.desktop
-# google-chrome.desktop
-# google-chrome-beta.desktop
-# vivaldi-stable.desktop
-# firefox.desktop
-## command (doesn't work)
-#xdg-mime default xxxx.desktop x-scheme-handler/https
-#xdg-settings set default-web-browser xxxx.desktop
-## add "x-scheme-handler/https=xxxx.desktop;xxxx.desktop;"
-#~/.config/mimeapps.list
-#echo $pswd | sudo -S xdg-mime default microsoft-edge.desktop x-scheme-handler/https
-#echo $pswd | sudo -S xdg-settings set default-web-browser microsoft-edge.desktop
-#echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/http=.*$/x-scheme-handler\/http=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
-#echo $pswd | sudo -S sed -i -e 's/^.*x-scheme-handler\/https=.*$/x-scheme-handler\/https=microsoft-edge.desktop;google-chrome.desktop;/' /usr/share/applications/mimeinfo.cache
 
 # ==== fonts
 # ==================================
@@ -173,43 +155,13 @@ rm -rf /tmp/zxcv
 rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
 rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
-# ==== display
-# ==================================
-#pacman -S sddm
-#systemctl enable sddm
-
-#cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
-#mkdir /etc/lightdm/sl; chmod 777 /etc/lightdm/sl
-#touch /etc/lightdm/sl/default.sh; chmod 755 /etc/lightdm/sl/default.sh; ln -snf /etc/lightdm/sl/default.sh /etc/lightdm/sl/sl.sh
-#sed -i -e 's/^#display-setup-script=.*$/display-setup-script=\/etc\/lightdm\/sl\/sl.sh/' /etc/lightdm/lightdm.conf
-
-
-# == i3wm
-# ==================================
-#cp -f ~/.config/i3/config ~/.config/i3/config_bak; ln -snf ~/dots/_ccy/i3/config ~/.config/i3/config
-
-# == budgie
-# ==================================
-#cp -f ~/dots/ccy/budgie/dconf ~/.config/dconf; ln -snf ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
-#cp -f ~/dots/_ccy/budgie/dconf/user ~/.config/dconf/user
-
 # ==== other setting
 # ==================================
-## file manager
-#cp -f ~/.config/dolphinrc ~/.config/dolphinrc_bak; ln -snf ~/dots/dir/dolphinrc ~/.config/dolphinrc
-
 ## hosts customize for Edge
-#127.0.0.1 browser.events.data.msn.com
-#127.0.0.1 c.msn.com
-#127.0.0.1 sb.scorecardresearch.com
-#127.0.0.1 api.msn.com   <- stopping
 echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts'
 
 ## GitHub
 echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
-
-## keymap
-#cp ~/dots/.Xmodmap ~/
 
 ## wallpaper
 cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
