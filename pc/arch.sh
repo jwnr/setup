@@ -119,7 +119,7 @@ echo -e "\n==== packages ==============================================\n"
 
 echo $pswd | sudo -S pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 echo $pswd | sudo -S pacman -S --noconfirm --needed remmina freerdp gparted flameshot
-echo $pswd | sudo -S sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
+#echo $pswd | sudo -S sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
 if [ $dstp -eq 2 ]; then
