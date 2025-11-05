@@ -91,7 +91,8 @@ else
   echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
   cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
   cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-  yay --sudoloop --noconfirm -Sya
+  yay --sudoloop --save
+  yay --noconfirm -Sya
 fi
 
 # ????
@@ -115,10 +116,10 @@ echo -e "\n==== packages ==============================================\n"
 # fossil remmina freerdp freerdp2
 # vivaldi vivaldi-ffmpeg-codecs
 
-echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
-echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
-echo $pswd | sudo -S pacman --noconfirm -Scc
+#echo $pswd | sudo -S pacman -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+#echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
+#echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
+#echo $pswd | sudo -S pacman --noconfirm -Scc
 
 yay -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
 yay -S --needed --noconfirm remmina freerdp gparted
