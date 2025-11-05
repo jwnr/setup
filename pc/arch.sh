@@ -84,23 +84,14 @@ fi
 
 echo -e "\n==== AUR package manager ===================================\n"
 
-if [ $dstp -eq 1 ]; then
+if [ $dstp -eq 2 ]; then
+  pamac update --no-confirm --aur
+else
   echo $pswd | sudo -S pacman --noconfirm -R yay
   echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
   cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
   cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-  yay --sudoloop --noconfirm -Syua
-
-  echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
-  cd ~/; git clone https://aur.archlinux.org/paru-bin.git paru-bin
-  cd paru-bin; makepkg -si --noconfirm; cd ../; rm -rf paru-bin
-  paru --sudoloop --noconfirm -Syua
-
-
-elif [ $dstp -eq 2 ]; then
-  pamac update --no-confirm --aur
-else
-  paru --noconfirm
+  yay --sudoloop --noconfirm -Sya
 fi
 
 # ????
@@ -129,16 +120,20 @@ echo $pswd | sudo -S pacman -S --needed --noconfirm remmina freerdp gparted
 echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 echo $pswd | sudo -S pacman --noconfirm -Scc
 
-if [ $dstp -eq 1 ]; then
-  yay -S --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
-  yay --noconfirm -Scc
-elif [ $dstp -eq 2 ]; then
+yay -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+yay -S --needed --noconfirm remmina freerdp gparted
+yay -S --needed --noconfirm nodejs npm; npm update -g npm
+yay --noconfirm -Scc
+
+if [ $dstp -eq 2 ]; then
   pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
-  paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
-  paru --noconfirm -Scc
+  yay -S --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  yay --noconfirm -Scc
 fi
+#paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+#paru --noconfirm -Scc
 
 
 # ==== default browser
