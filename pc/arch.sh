@@ -12,7 +12,7 @@ select opt in "${options[@]}"; do
   case "$REPLY" in
     q) break ;;
     '' ) echo "error" ;;
-    *[!1-3]* ) echo " invalid value" ;;
+    *[!1-4]* ) echo " invalid value" ;;
     *)
       if (( REPLY >= 1 && REPLY <= ${#options[@]} )); then
         dstp=$REPLY
