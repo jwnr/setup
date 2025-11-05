@@ -33,7 +33,7 @@ echo -e "\n\n==== preparing =============================================\n"
 # ==== udate db (force)
 echo $pswd | sudo -S pacman -Syy
 # ==== install essential packages
-echo $pswd | sudo -S pacman -S --noconfirm git base-devel
+echo $pswd | sudo -S pacman -S --noconfirm --needed git base-devel
 # ==== remove packages
 echo $pswd | sudo -S pacman -R --noconfirm vim
 echo $pswd | sudo -S pacman -R --noconfirm nano
@@ -67,11 +67,11 @@ echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 
 if [ $dstp -eq 2 ]; then
-  echo $pswd | sudo -S pacman -S --needed --noconfirm pacman-mirrors
+  echo $pswd | sudo -S pacman -S --noconfirm --needed pacman-mirrors
 elif [ $dstp -eq 4 ]; then
-  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy --noconfirm reflector
+  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
 else
-  echo $pswd | sudo -S pacman -S --needed --noconfirm reflector
+  echo $pswd | sudo -S pacman -S --noconfirm --needed reflector
 fi
 
 if [ $dstp -eq 2 ]; then
@@ -87,12 +87,11 @@ echo -e "\n==== AUR package manager ===================================\n"
 if [ $dstp -eq 2 ]; then
   pamac update --no-confirm --aur
 else
-  echo $pswd | sudo -S pacman --noconfirm -R yay
-  echo $pswd | sudo -S pacman --noconfirm -S fakeroot debugedit
+  echo $pswd | sudo -S pacman -S --noconfirm yay
+  echo $pswd | sudo -S pacman -S --noconfirm --needed fakeroot debugedit
   cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
   cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-  yay --sudoloop --save
-  yay --noconfirm -Sya
+  yay -Sya --noconfirm --sudoloop --save
 fi
 
 # ????
@@ -121,16 +120,16 @@ echo -e "\n==== packages ==============================================\n"
 #echo $pswd | sudo -S sh -c 'pacman -S --needed --noconfirm nodejs npm; npm update -g npm'
 #echo $pswd | sudo -S pacman --noconfirm -Scc
 
-yay -S --needed --noconfirm vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-yay -S --needed --noconfirm remmina freerdp gparted
-yay -S --needed --noconfirm nodejs npm; npm update -g npm
+yay -S --noconfirm --needed vi rsync unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+yay -S --noconfirm --needed remmina freerdp gparted
+yay -S --noconfirm --needed nodejs npm; npm update -g npm
 yay --noconfirm -Scc
 
 if [ $dstp -eq 2 ]; then
   pamac build --no-confirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   pamac clean --no-confirm -u -b -k 1 
 else
-  yay -S --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+  yay -S --noconfirm --needed google-chrome microsoft-edge-stable-bin visual-studio-code-bin
   yay --noconfirm -Scc
 fi
 #paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
