@@ -125,11 +125,6 @@ fi
 #??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 
 
-echo -e "\n==== locale, time ==============\n================================"
-# ==== locale, time
-sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
-source /etc/locale.conf
-
 echo -e "\n==== my dotfiles ===============\n================================"
 # ==== [normal user] get key files & dotfiles
 sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
@@ -210,6 +205,13 @@ sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name 
 sudo -u "$SUDO_USER" cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
 # ==================================
+
+
+echo -e "\n==== locale, time ==============\n================================"
+# ==== locale, time
+sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+source /etc/locale.conf
+
 
 
 echo -e "\n==== succeeded ============================================="
