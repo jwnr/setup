@@ -58,7 +58,7 @@ select opt in "${options[@]}"; do
 done
 
 
-echo -e "==== preparing =============================================\n"
+echo -e "==== preparing =================\n================================"
 # ==== pacman config
 sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
@@ -66,10 +66,13 @@ sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 # ==== update DB
 pacman -Syy
+
 # ==== remove packages
+echo -e "\n== remove packages (-Rns)"
 for pkg in vim nano micro firefox cachy-browser falkon; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
 
-echo -e "\n== [Artix] add Arch support \n"
+# ==== [Artix] add Arch support
+echo -e "\n== add Arch support"
 if [ $dstp -eq 4 ]; then
   pacman -S -q --noprogressbar --noconfirm artix-archlinux-support
   cp /etc/pacman.conf /etc/pacman.conf.arch
@@ -80,8 +83,7 @@ if [ $dstp -eq 4 ]; then
   #pacman --config /etc/pacman.conf.arch -Syy
 fi
 
-
-echo -e "\n==== ranking mirrors =======================================\n"
+echo -e "\n==== ranking mirrors ===========\n================================"
 if [ $dstp -eq 2 ]; then
   pacman -S --noconfirm --needed pacman-mirrors
   pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
