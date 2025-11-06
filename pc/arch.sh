@@ -133,6 +133,7 @@ source /etc/locale.conf
 echo -e "\n==== my dotfiles ===========================================\n"
 # ==== [normal user] get key files & dotfiles
 sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
+sudo -u "$SUDO_USER" rm -f ~/.netrc
 sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
 # ==== [normal user] SSH
 sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
