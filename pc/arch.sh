@@ -101,8 +101,8 @@ else
 
 fi
 
-echo -e "\n==== update packages (none aur) \n================================"
-pacman -Syyu -q --noprogressbar --noconfirm
+echo -e "\n==== update packages (none AUR) \n================================"
+pacman -Syyu -q --noconfirm
 
 
 #echo -e "\n==== locale, time ==============\n================================"
@@ -111,7 +111,7 @@ pacman -Syyu -q --noprogressbar --noconfirm
 #source /etc/locale.conf
 
 
-echo -e "\n==== AUR package manager =======\n================================"
+echo -e "\n==== AUR install manager & update DB\n================================"
 sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
 
 if [ $dstp -eq 2 ]; then
@@ -122,7 +122,7 @@ else
   pacman -S -q --noprogressbar --noconfirm --needed fakeroot base-devel debugedit
   sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
   sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
-  sudo -u "$SUDO_USER" yay -Sya -q --noprogressbar --noconfirm --sudoloop --save
+  sudo -u "$SUDO_USER" yay -Sya -q --noconfirm --sudoloop --save
 
 fi
 
