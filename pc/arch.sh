@@ -85,15 +85,15 @@ fi
 
 echo -e "\n==== ranking mirrors ===========\n================================"
 if [ $dstp -eq 2 ]; then
-  pacman -S --noconfirm --needed pacman-mirrors
+  pacman -S -q --noprogressbar --noconfirm --needed pacman-mirrors
   pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
   if [ $dstp -eq 4 ]; then
-    pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
+    pacman --config /etc/pacman.conf.arch -Sy -q --noprogressbar --noconfirm --needed reflector
   else
-    pacman -S --noconfirm --needed reflector
+    pacman -S -q --noprogressbar --noconfirm --needed reflector
   fi
 
   reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
