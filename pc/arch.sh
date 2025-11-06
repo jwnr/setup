@@ -15,7 +15,7 @@ echo -e '********************************************************\n'
 
 
 PS3="Select repository type (q=quit): "
-options=("Arch, EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
+options=("EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
 select opt in "${options[@]}"; do
   case "$REPLY" in
     q) break ;;
@@ -78,7 +78,9 @@ if [ $dstp -eq 2 ]; then
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
-  if [ $dstp -eq 4 ]; then
+  if [ $dstp -eq 1 ]; then
+    # installed
+  elif [ $dstp -eq 4 ]; then
     pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
   else
     pacman -S --noconfirm --needed reflector
@@ -93,12 +95,19 @@ echo -e "\n==== AUR package manager ===================================\n"
 
 if [ $dstp -eq 2 ]; then
   sudo -u "$SUDO_USER" pamac update --no-confirm --aur
+
 else
-  pacman -R --noconfirm yay
-  pacman -S --noconfirm --needed fakeroot base-devel debugedit
-  sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
-  sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
+  if [ $dstp -eq  ]; then
+    # installed
+  else
+    pacman -R --noconfirm yay
+    pacman -S --noconfirm --needed fakeroot base-devel debugedit
+    sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
+    sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
+  fi
+  
   sudo -u "$SUDO_USER" yay -Sya --noconfirm --sudoloop --save
+
 fi
 
 # ????
