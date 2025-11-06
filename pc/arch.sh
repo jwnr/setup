@@ -38,6 +38,26 @@ select opt in "${options[@]}"; do
   esac
 done
 
+PS3="Select GPU (q=quit): "
+options=("NVIDIA" "Radeon" "AMD" "Intel")
+select opt in "${options[@]}"; do
+  case "$REPLY" in
+    q) break ;;
+    '' ) echo "error" ;;
+    *[!1-4]* ) echo " invalid value" ;;
+    *)
+      if (( REPLY >= 1 && REPLY <= ${#options[@]} )); then
+        gpu=$REPLY
+        echo
+        break
+      else
+        echo " invalid value"
+      fi
+      ;;
+  esac
+done
+
+
 PS3="Select DE (q=quit): "
 options=("KDE" "Others")
 select opt in "${options[@]}"; do
@@ -150,6 +170,18 @@ echo -e "\n==== install packages ==========\n================================"
 # brave    vivaldi vivaldi-ffmpeg-codecs
 # viewnior mupdf flameshot
 # fossil remmina freerdp freerdp2
+
+
+echo -e "== [SYSTEM] ===========\n"
+if [ $gpu -eq 1 ]; then
+  pacman -S -q --noprogressbar --noconfirm linux-firmware-nvidia
+elif [ $gpu -eq 2 ]; then
+  pacman -S -q --noprogressbar --noconfirm linux-firmware-radeon
+elif [ $gpu -eq 3 ]; then
+  pacman -S -q --noprogressbar --noconfirm linux-firmware-amdgpu
+else
+  pacman -S -q --noprogressbar --noconfirm linux-firmware-intel
+fi
 
 echo -e "== [BASE] =============\n"
 # pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
