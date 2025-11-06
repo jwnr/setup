@@ -78,9 +78,7 @@ if [ $dstp -eq 2 ]; then
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
-  if [ $dstp -eq 1 ]; then
-    # installed
-  elif [ $dstp -eq 4 ]; then
+  if [ $dstp -eq 4 ]; then
     pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
   else
     pacman -S --noconfirm --needed reflector
@@ -97,15 +95,10 @@ if [ $dstp -eq 2 ]; then
   sudo -u "$SUDO_USER" pamac update --no-confirm --aur
 
 else
-  if [ $dstp -eq  ]; then
-    # installed
-  else
-    pacman -R --noconfirm yay
-    pacman -S --noconfirm --needed fakeroot base-devel debugedit
-    sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
-    sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
-  fi
-  
+  pacman -R --noconfirm yay
+  pacman -S --noconfirm --needed fakeroot base-devel debugedit
+  sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
+  sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
   sudo -u "$SUDO_USER" yay -Sya --noconfirm --sudoloop --save
 
 fi
