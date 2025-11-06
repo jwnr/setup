@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# version 1.0.1
 
 if [ -z "$SUDO_USER" ]; then
   echo -e '\n##########################################'
