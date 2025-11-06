@@ -1,8 +1,16 @@
 #!/bin/bash
 
 echo -e "\n============================================================\n==== starting ==============================================\n============================================================"
+
+if [ -z "$SUDO_USER" ]; then
+  echo -e '\n********************************************************'
+  echo "  error: run this script as 'sudo ./xx.sh'"
+  echo -e '********************************************************\n'
+  exit 1
+fi
+
 echo -e '\n********************************************************'
-echo -e ' + This script should be executed by normal user.\n + Do not pipe to "| sh", download and execute.\n + Before execute this shell, do such command once.\n        sudo xx (and enter passwd)'
+echo -e ' + Do not pipe to "| sh", download and execute.'
 echo -e '********************************************************\n'
 
 
@@ -25,74 +33,72 @@ select opt in "${options[@]}"; do
   esac
 done
 
-read -sp "Enter root password: " pswd
-
 
 echo -e "\n\n==== preparing =============================================\n"
 
-# ==== udate db (force)
-echo $pswd | sudo -S pacman -Syy
+# ==== update db (force)
+pacman -Syy
 # ==== install essential packages
-echo $pswd | sudo -S pacman -S --noconfirm --needed git
+pacman -S --noconfirm --needed git
 # ==== remove packages
-echo $pswd | sudo -S pacman -R --noconfirm vim
-echo $pswd | sudo -S pacman -R --noconfirm nano
-echo $pswd | sudo -S pacman -R --noconfirm micro
-echo $pswd | sudo -S pacman -R --noconfirm firefox
-echo $pswd | sudo -S pacman -R --noconfirm cachy-browser
-echo $pswd | sudo -S pacman -R --noconfirm falkon
+pacman -R --noconfirm vim
+pacman -R --noconfirm nano
+pacman -R --noconfirm micro
+pacman -R --noconfirm firefox
+pacman -R --noconfirm cachy-browser
+pacman -R --noconfirm falkon
 
-# ==== get key files & dotfiles
-cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*
-git clone git@github.com:jwnr/dots.git
-# ==== SSH
-rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config
-chmod 400 ~/dots/dir/.ssh/*/*
+# ==== [normal user] get key files & dotfiles
+sudo -u "$SUDO_USER" sh -c 'cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
+sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
+# ==== [normal user] SSH
+sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
 
 # ==== [Artix] add Arch support
 if [ $dstp -eq 4 ]; then
-  echo $pswd | sudo -S pacman -S --noconfirm artix-archlinux-support
-  echo $pswd | sudo -S cp /etc/pacman.conf /etc/pacman.conf.arch
-  echo $pswd | sudo -S echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\ | sudo tee -a /etc/pacman.conf.arch
-  #echo $pswd | sudo -S echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
-  echo $pswd | sudo -S pacman-key --populate archlinux
-  #echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy
+  pacman -S --noconfirm artix-archlinux-support
+  cp /etc/pacman.conf /etc/pacman.conf.arch
+  echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\ | sudo tee -a /etc/pacman.conf.arch
+  #echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
+  pacman-key --populate archlinux
+  #pacman --config /etc/pacman.conf.arch -Sy
 fi
 
 
 echo -e "\n==== ranking mirrors =======================================\n"
 
-echo $pswd | sudo -S sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
-echo $pswd | sudo -S sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
+sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
+sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 
 if [ $dstp -eq 2 ]; then
-  echo $pswd | sudo -S pacman -S --noconfirm --needed pacman-mirrors
-elif [ $dstp -eq 4 ]; then
-  echo $pswd | sudo -S pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
-else
-  echo $pswd | sudo -S pacman -S --noconfirm --needed reflector
-fi
+  pacman -S --noconfirm --needed pacman-mirrors
+  pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
+  # pacman-mirrors --fasttrack 8 --api --proto https
 
-if [ $dstp -eq 2 ]; then
-  echo $pswd | sudo -S pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
-  # echo $pswd | sudo -S pacman-mirrors --fasttrack 8 --api --proto https
 else
-  echo $pswd | sudo -S reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
+  if [ $dstp -eq 4 ]; then
+    pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
+  else
+    pacman -S --noconfirm --needed reflector
+  fi
+
+  reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
+
 fi
 
 
 echo -e "\n==== AUR package manager ===================================\n"
 
 if [ $dstp -eq 2 ]; then
-  pamac update --no-confirm --aur
+  sudo -u "$SUDO_USER" pamac update --no-confirm --aur
 else
-  echo $pswd | sudo -S pacman -S --noconfirm yay
-  echo $pswd | sudo -S pacman -S --noconfirm --needed fakeroot base-devel debugedit
-  cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin
-  cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin
-  yay -Sya --noconfirm --sudoloop --save
+  pacman -R --noconfirm yay
+  pacman -S --noconfirm --needed fakeroot base-devel debugedit
+  sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
+  sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
+  sudo -u "$SUDO_USER" yay -Sya --noconfirm --sudoloop --save
 fi
 
 # ????
@@ -102,8 +108,8 @@ fi
 
 echo -e "\n==== locale, time ==========================================\n"
 # ==== locale, time
-echo $pswd | sudo -S sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
-echo $pswd | sudo -S source /etc/locale.conf
+sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+source /etc/locale.conf
 
 
 echo -e "\n==== packages ==============================================\n"
@@ -117,56 +123,58 @@ echo -e "\n==== packages ==============================================\n"
 # viewnior mupdf flameshot
 # fossil remmina freerdp freerdp2
 
-echo $pswd | sudo -S pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-echo $pswd | sudo -S pacman -S --noconfirm --needed remmina freerdp gparted flameshot
-#echo $pswd | sudo -S sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
-echo $pswd | sudo -S pacman --noconfirm -Scc
+pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
+pacman -S --noconfirm --needed remmina freerdp gparted flameshot
+#sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
+pacman --noconfirm -Scc
 
 if [ $dstp -eq 2 ]; then
-  #pamac build --no-confirm microsoft-edge-stable-bin google-chrome visual-studio-code-bin
-  pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
-  pamac clean --no-confirm -u -b -k 1 
+  #sudo -u "$SUDO_USER" pamac build --no-confirm microsoft-edge-stable-bin google-chrome visual-studio-code-bin
+  sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
+  sudo -u "$SUDO_USER" pamac clean --no-confirm -u -b -k 1 
 else
-  #yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome visual-studio-code-bin
-  yay -S --noconfirm --needed brave-bin google-chrome visual-studio-code-bin
-  yay --noconfirm -Scc
+  #sudo -u "$SUDO_USER" yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome visual-studio-code-bin
+  sudo -u "$SUDO_USER" yay -S --noconfirm --needed brave-bin google-chrome visual-studio-code-bin
+  sudo -u "$SUDO_USER" yay --noconfirm -Scc
 fi
-#paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
-#paru --noconfirm -Scc
+#sudo -u "$SUDO_USER" paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
+#sudo -u "$SUDO_USER" paru --noconfirm -Scc
 
 
 # ==== fonts
 # ==================================
-echo $pswd | sudo -S pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
-echo $pswd | sudo -S ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
-echo $pswd | sudo -S ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/
-mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
-fc-cache -fv
+pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
+ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
+sudo -u "$SUDO_USER" mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/
+sudo -u "$SUDO_USER" mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+sudo -u "$SUDO_USER" fc-cache -fv
 
 # ==== fcitx
 # ==================================
 # /usr/share/icons/hicolor/00x00/apps/
 # 32 48 128
-echo $pswd | sudo -S sh -c 'echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile'
+echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+
 mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/* /tmp/zxcv/
-#echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/'
-echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/'
-#echo $pswd | sudo -S sh -c 'cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/'
+#cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
+cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
+#cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
 rm -rf /tmp/zxcv
-rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
-rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
+
+sudo -u "$SUDO_USER" rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
+sudo -u "$SUDO_USER" rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
 
 # ==== other setting
 # ==================================
 ## hosts customize for Edge
-echo $pswd | sudo -S sh -c 'echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts'
+echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts
 
 ## GitHub
-echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig
+sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig'
 
 ## wallpaper
-cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
+sudo -u "$SUDO_USER" cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
 
 # ==================================
 
