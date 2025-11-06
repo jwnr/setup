@@ -13,6 +13,10 @@ echo -e '\n********************************************************'
 echo -e ' + Do not pipe to "| sh", download and execute.'
 echo -e '********************************************************\n'
 
+read -s -p "Enter username for key file: " husr; echo
+read -s -p "      password             : " hpsw; echo
+sudo -u "$SUDO_USER" sh -c 'echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > ~/.netrc'
+chmod 600 ~/.netrc
 
 PS3="Select repository type (q=quit): "
 options=("EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
@@ -53,13 +57,14 @@ select opt in "${options[@]}"; do
 done
 
 
-
 echo -e "\n\n==== preparing =============================================\n"
-
+# ==== pacman config
+sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
+sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
+sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
+sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 # ==== update db (force)
 pacman -Syy
-# ==== install essential packages
-pacman -S --noconfirm --needed git
 # ==== remove packages
 pacman -R --noconfirm vim
 pacman -R --noconfirm nano
@@ -68,12 +73,6 @@ pacman -R --noconfirm firefox
 pacman -R --noconfirm cachy-browser
 pacman -R --noconfirm falkon
 
-# ==== [normal user] get key files & dotfiles
-sudo -u "$SUDO_USER" sh -c 'cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
-sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
-# ==== [normal user] SSH
-sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
-
 # ==== [Artix] add Arch support
 if [ $dstp -eq 4 ]; then
   pacman -S --noconfirm artix-archlinux-support
@@ -81,17 +80,11 @@ if [ $dstp -eq 4 ]; then
   echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\ | sudo tee -a /etc/pacman.conf.arch
   #echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
   pacman-key --populate archlinux
-  #pacman --config /etc/pacman.conf.arch -Sy
+  #pacman --config /etc/pacman.conf.arch -Syy
 fi
 
 
 echo -e "\n==== ranking mirrors =======================================\n"
-
-sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
-sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
-sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
-sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
-
 if [ $dstp -eq 2 ]; then
   pacman -S --noconfirm --needed pacman-mirrors
   pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
@@ -99,7 +92,7 @@ if [ $dstp -eq 2 ]; then
 
 else
   if [ $dstp -eq 4 ]; then
-    pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
+    pacman --config /etc/pacman.conf.arch -S --noconfirm --needed reflector
   else
     pacman -S --noconfirm --needed reflector
   fi
@@ -108,9 +101,11 @@ else
 
 fi
 
+echo -e "\n==== update packages (none aur) ============================\n"
+pacman -Syyu -q --noconfirm
+
 
 echo -e "\n==== AUR package manager ===================================\n"
-
 if [ $dstp -eq 2 ]; then
   sudo -u "$SUDO_USER" pamac update --no-confirm --aur
 
@@ -132,6 +127,13 @@ echo -e "\n==== locale, time ==========================================\n"
 # ==== locale, time
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 source /etc/locale.conf
+
+echo -e "\n==== my dotfiles ===========================================\n"
+# ==== [normal user] get key files & dotfiles
+sudo -u "$SUDO_USER" sh -c 'cd ~; curl -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
+sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
+# ==== [normal user] SSH
+sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
 
 
 echo -e "\n==== packages ==============================================\n"
