@@ -186,19 +186,19 @@ sudo -u "$SUDO_USER" fc-cache -fv
 
 # ==== fcitx
 # ==================================
-# /usr/share/icons/hicolor/00x00/apps/
-# 32 48 128
+# -- icon
+# /usr/share/icons/hicolor/00x00/apps/   32 48 128
+#mkdir /tmp/zxcv; rsync -a /home/$SUDO_USER/dots/files/fcitx5/* /tmp/zxcv/
+#cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
+#cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
+#cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
+#rm -rf /tmp/zxcv
+# -- startup
 #echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
 #echo -e "XMODIFIERS=@im=fcitx5\nexport GTK_IM_MODULE=fcitx5\nexport QT_IM_MODULE=fcitx5\n" >> /etc/environment
-
-mkdir /tmp/zxcv; rsync -a /home/$SUDO_USER/dots/files/fcitx5/* /tmp/zxcv/
-#cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
-cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
-#cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
-rm -rf /tmp/zxcv
-
-#sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/'
-#sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/'
+# -- config
+sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/dir/.config/fcitx/* ~/.config/fcitx5/'
+sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/dir/.config/mozc/* ~/.config/mozc/'
 
 # ==== other setting
 # ==================================
