@@ -125,12 +125,12 @@ fi
 #??echo $pswd | sudo -S sed -i -e 's/^#BUILDDIR/BUILDDIR/' /etc/makepkg.conf
 
 
-echo -e "\n==== locale, time ==========================================\n"
+echo -e "\n==== locale, time ==============\n================================"
 # ==== locale, time
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 source /etc/locale.conf
 
-echo -e "\n==== my dotfiles ===========================================\n"
+echo -e "\n==== my dotfiles ===============\n================================"
 # ==== [normal user] get key files & dotfiles
 sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
 sudo -u "$SUDO_USER" rm -f ~/.netrc
@@ -139,7 +139,7 @@ sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
 sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
 
 
-echo -e "\n==== packages ==============================================\n"
+echo -e "\n==== install packages ==========\n================================"
 # ==== packages
 # ==================================
 # jq nodejs-lts nodejs-lts-gallium bun deno(deno upgrade)
