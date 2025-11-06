@@ -13,12 +13,12 @@ echo -e '\n********************************************************'
 echo -e ' + Do not pipe to "| sh", download and execute.'
 echo -e '********************************************************\n'
 
-read -s -p "Enter username for key file: " husr; echo
-read -s -p "      password             : " hpsw; echo
+read -s -p "username for getting key file: " husr; echo
+read -s -p "password                     : " hpsw; echo
 sudo -u "$SUDO_USER" sh -c 'echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > ~/.netrc'
 chmod 600 ~/.netrc
 
-PS3="Select repository type (q=quit): "
+PS3="Select dist (q=quit): "
 options=("EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
 select opt in "${options[@]}"; do
   case "$REPLY" in
@@ -63,8 +63,6 @@ sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
 sed -i -e 's/^.*Color$/Color/' /etc/pacman.conf
 sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
-# ==== update db (force)
-pacman -Syy
 # ==== remove packages
 pacman -R --noconfirm vim
 pacman -R --noconfirm nano
@@ -75,7 +73,7 @@ pacman -R --noconfirm falkon
 
 # ==== [Artix] add Arch support
 if [ $dstp -eq 4 ]; then
-  pacman -S --noconfirm artix-archlinux-support
+  pacman -Sy --noconfirm artix-archlinux-support
   cp /etc/pacman.conf /etc/pacman.conf.arch
   echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\ | sudo tee -a /etc/pacman.conf.arch
   #echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
@@ -86,15 +84,15 @@ fi
 
 echo -e "\n==== ranking mirrors =======================================\n"
 if [ $dstp -eq 2 ]; then
-  pacman -S --noconfirm --needed pacman-mirrors
+  pacman -Sy --noconfirm --needed pacman-mirrors
   pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
   if [ $dstp -eq 4 ]; then
-    pacman --config /etc/pacman.conf.arch -S --noconfirm --needed reflector
+    pacman --config /etc/pacman.conf.arch -Sy --noconfirm --needed reflector
   else
-    pacman -S --noconfirm --needed reflector
+    pacman -Sy --noconfirm --needed reflector
   fi
 
   reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
@@ -106,6 +104,8 @@ pacman -Syyu -q --noconfirm
 
 
 echo -e "\n==== AUR package manager ===================================\n"
+sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
+
 if [ $dstp -eq 2 ]; then
   sudo -u "$SUDO_USER" pamac update --no-confirm --aur
 
