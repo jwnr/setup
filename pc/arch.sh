@@ -112,12 +112,12 @@ pacman -Syyu -q --noconfirm git
 
 
 echo -e "\n==== AUR install manager & update DB\n================================"
-sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
-
 if [ $dstp -eq 2 ]; then
+  echo -e 'polkit.addRule(function(action, subject){if(action.id=="org.manjaro.pamac.commit"&&subject.isInGroup("wheel")){return polkit.Result.YES}})' > /etc/polkit-1/rules.d/99-pamac-nopasswd.rules
   pamac update --no-confirm --aur
 
 else
+  sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
   pacman -R --noconfirm yay
   pacman -S -q --noprogressbar --noconfirm --needed fakeroot base-devel debugedit
   sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
@@ -152,7 +152,8 @@ echo -e "\n==== install packages ==========\n================================"
 # fossil remmina freerdp freerdp2
 
 echo -e "== [BASE] =============\n"
-pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
+# pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
+for pkg in vi rsync zip unzip unrar exfatprogs gparted flameshot; do pacman -S --noconfirm --needed "$pkg"; done
 echo -e "\n== [IME] ==============\n"
 pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
 echo -e "\n== [RDP] ==============\n"
@@ -161,8 +162,8 @@ pacman --noconfirm -Scc
 
 echo -e "\n== [AUR] ==============\n"
 if [ $dstp -eq 2 ]; then
-  #sudo -u "$SUDO_USER" pamac build --no-confirm microsoft-edge-stable-bin google-chrome visual-studio-code-bin
-  sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
+  # sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
+  for pkg in brave-bin google-chrome visual-studio-code-bin; do pamac build --no-confirm "$pkg"; done
   sudo -u "$SUDO_USER" pamac clean --no-confirm -u -b -k 1 
 else
   #sudo -u "$SUDO_USER" yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome visual-studio-code-bin
@@ -208,7 +209,7 @@ echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0
 sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig'
 
 ## wallpaper
-sudo -u "$SUDO_USER" cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg
+sudo -u "$SUDO_USER" sh -c 'cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg'
 
 # ==================================
 
@@ -232,4 +233,4 @@ echo -e " | Markdown editor  | Obsidian                                   |"
 echo -e " +------------------+--------------------------------------------+"
 echo -e "============================================================\n"
 
-# version 1.0.3
+# version 1.0.4
