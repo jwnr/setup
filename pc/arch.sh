@@ -15,8 +15,9 @@ echo -e '********************************************************'
 read -p "username for getting key file : " husr
 read -s -p "password :" hpsw
 echo
-sudo -u "$SUDO_USER" sh -c 'echo -e machine k.jwnr.net\\nlogin $husr\\npassword $hpsw > ~/.netrc'
-sudo -u "$SUDO_USER" sh -c 'chmod 600 ~/.netrc'
+echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > /home/$SUDO_USER/.netrc
+chown $SUDO_USER:$SUDO_USER /home/$SUDO_USER/.netrc'
+chmod 600 /home/$SUDO_USER/.netrc
 echo
 
 PS3="Select dist (q=quit): "
