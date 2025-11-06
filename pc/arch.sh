@@ -100,11 +100,11 @@ else
 
 fi
 
-echo -e "\n==== update packages (none aur) ============================\n"
+echo -e "\n==== update packages (none aur) \n================================"
 pacman -Syyu -q --noprogressbar --noconfirm
 
 
-echo -e "\n==== AUR package manager ===================================\n"
+echo -e "\n==== AUR package manager =======\n================================"
 sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
 
 if [ $dstp -eq 2 ]; then
