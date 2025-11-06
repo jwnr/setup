@@ -70,6 +70,7 @@ pacman -Syy
 # ==== remove packages
 echo -e "\n== remove packages (-Rns)"
 for pkg in vim nano micro firefox cachy-browser falkon vlc; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
+pacman -Rdd --unneeded --noprogressbar --noscriptlet --noconfirm linux-firmware
 
 # ==== [Artix] add Arch support
 echo -e "\n== add Arch support"
@@ -86,7 +87,7 @@ fi
 echo -e "\n==== ranking mirrors ===========\n================================"
 if [ $dstp -eq 2 ]; then
   pacman -S -q --noprogressbar --noconfirm --needed pacman-mirrors
-  pacman-mirrors -c Japan,Taiwan,Singapore --api --proto https
+  pacman-mirrors -c Japan,United_States,Australia,Singapore --api --proto https
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
@@ -96,12 +97,12 @@ else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
   fi
 
-  reflector --latest 8 --age 24 -c JP,TW,IN,KR --protocol https,rsync --sort score
+  reflector --latest 8 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score
 
 fi
 
 echo -e "\n==== update packages (none AUR) \n================================"
-pacman -Syyu -q --noconfirm --overwrite /usr/lib/firmware/**
+pacman -Syyu -q --noconfirm git
 
 
 #echo -e "\n==== locale, time ==============\n================================"
@@ -114,7 +115,7 @@ echo -e "\n==== AUR install manager & update DB\n===============================
 sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
 
 if [ $dstp -eq 2 ]; then
-  sudo -u "$SUDO_USER" pamac update --no-confirm --aur
+  pamac update --no-confirm --aur
 
 else
   pacman -R --noconfirm yay
@@ -133,8 +134,8 @@ fi
 echo -e "\n==== my dotfiles ===============\n================================"
 # ==== [normal user] get key files & dotfiles
 sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
-sudo -u "$SUDO_USER" rm -f ~/.netrc
-sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
+sudo -u "$SUDO_USER" sh -c 'rm -f ~/.netrc'
+sudo -u "$SUDO_USER" sh -c 'git clone git@github.com:jwnr/dots.git'
 # ==== [normal user] SSH
 sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
 
@@ -189,14 +190,14 @@ sudo -u "$SUDO_USER" fc-cache -fv
 #echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
 #echo -e "XMODIFIERS=@im=fcitx5\nexport GTK_IM_MODULE=fcitx5\nexport QT_IM_MODULE=fcitx5\n" >> /etc/environment
 
-mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/* /tmp/zxcv/
+mkdir /tmp/zxcv; rsync -a /home/$SUDO_USER/dots/files/fcitx5/* /tmp/zxcv/
 #cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
 cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
 #cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
 rm -rf /tmp/zxcv
 
-sudo -u "$SUDO_USER" rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/
-sudo -u "$SUDO_USER" rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/
+sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/'
+sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/'
 
 # ==== other setting
 # ==================================
@@ -231,4 +232,4 @@ echo -e " | Markdown editor  | Obsidian                                   |"
 echo -e " +------------------+--------------------------------------------+"
 echo -e "============================================================\n"
 
-# version 1.0.2
+# version 1.0.3
