@@ -103,7 +103,7 @@ else
 fi
 
 echo -e "\n==== update packages (none aur) ============================\n"
-pacman -Syyu -q --noconfirm
+pacman -Syyu --quiet --noconfirm
 
 
 echo -e "\n==== AUR package manager ===================================\n"
