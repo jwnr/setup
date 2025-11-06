@@ -69,7 +69,7 @@ pacman -Syy
 
 # ==== remove packages
 echo -e "\n== remove packages (-Rns)"
-for pkg in vim nano micro firefox cachy-browser falkon; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
+for pkg in vim nano micro firefox cachy-browser falkon vlc; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
 
 # ==== [Artix] add Arch support
 echo -e "\n== add Arch support"
@@ -101,7 +101,7 @@ else
 fi
 
 echo -e "\n==== update packages (none AUR) \n================================"
-pacman -Syyu -q --noconfirm
+pacman -Syyu -q --noconfirm --overwrite /usr/lib/firmware/**
 
 
 #echo -e "\n==== locale, time ==============\n================================"
@@ -231,4 +231,4 @@ echo -e " | Markdown editor  | Obsidian                                   |"
 echo -e " +------------------+--------------------------------------------+"
 echo -e "============================================================\n"
 
-# version 1.0.1
+# version 1.0.2
