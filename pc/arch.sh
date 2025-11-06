@@ -169,11 +169,12 @@ fi
 
 # ==== fonts
 # ==================================
-pacman --noconfirm -S otf-ipaexfont noto-fonts-emoji
+pacman --noconfirm -S otf-ipaexfont
+pacman --noconfirm -S noto-fonts-emoji
 ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
-sudo -u "$SUDO_USER" mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/
-sudo -u "$SUDO_USER" mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+sudo -u "$SUDO_USER" sh -c 'mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/'
+sudo -u "$SUDO_USER" sh -c 'mkdir -p ~/.config/fontconfig; ln -snf ~/dots/dir/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf'
 sudo -u "$SUDO_USER" fc-cache -fv
 
 # ==== fcitx
