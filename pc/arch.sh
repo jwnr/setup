@@ -197,8 +197,8 @@ cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
 #cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
 rm -rf /tmp/zxcv
 
-sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/'
-sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/'
+#sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/fcitx5/* ~/.config/fcitx5/'
+#sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/end/dir/.config/mozc/* ~/.config/mozc/'
 
 # ==== other setting
 # ==================================
