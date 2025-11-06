@@ -105,6 +105,12 @@ echo -e "\n==== update packages (none aur) \n================================"
 pacman -Syyu -q --noprogressbar --noconfirm
 
 
+#echo -e "\n==== locale, time ==============\n================================"
+# ==== locale, time
+#sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+#source /etc/locale.conf
+
+
 echo -e "\n==== AUR package manager =======\n================================"
 sh -c 'echo -e "$SUDO_USER  ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/10-nopasswd-pacman'
 
@@ -206,11 +212,6 @@ sudo -u "$SUDO_USER" cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpape
 
 # ==================================
 
-
-echo -e "\n==== locale, time ==============\n================================"
-# ==== locale, time
-sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
-source /etc/locale.conf
 
 
 
