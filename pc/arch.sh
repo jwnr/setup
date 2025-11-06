@@ -114,10 +114,10 @@ if [ $dstp -eq 2 ]; then
 
 else
   pacman -R --noconfirm yay
-  pacman -S --noconfirm --needed fakeroot base-devel debugedit
+  pacman -S -q --noprogressbar --noconfirm --needed fakeroot base-devel debugedit
   sudo -u "$SUDO_USER" sh -c 'cd ~/; git clone https://aur.archlinux.org/yay-bin.git yay-bin'
   sudo -u "$SUDO_USER" sh -c 'cd yay-bin; makepkg -si --noconfirm; cd ../; rm -rf yay-bin'
-  sudo -u "$SUDO_USER" yay -Sya --noconfirm --sudoloop --save
+  sudo -u "$SUDO_USER" yay -Sya -q --noprogressbar --noconfirm --sudoloop --save
 
 fi
 
