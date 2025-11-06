@@ -12,10 +12,10 @@ echo -e '\n********************************************************'
 echo -e ' + Do not pipe to "| sh", download and execute.'
 echo -e '********************************************************\n'
 
-read -s "username for getting key file : " husr; echo
+read -p "username for getting key file : " husr; echo
 read -s -p "password :" hpsw; echo
 sudo -u "$SUDO_USER" sh -c 'echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > ~/.netrc'
-sudo -u "$SUDO_USER" chmod 600 ~/.netrc
+sudo -u "$SUDO_USER" sh -c 'chmod 600 ~/.netrc'
 
 PS3="Select dist (q=quit): "
 options=("EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
