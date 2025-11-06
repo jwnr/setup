@@ -33,6 +33,26 @@ select opt in "${options[@]}"; do
   esac
 done
 
+PS3="Select DE (q=quit): "
+options=("KDE" "Others")
+select opt in "${options[@]}"; do
+  case "$REPLY" in
+    q) break ;;
+    '' ) echo "error" ;;
+    *[!1-2]* ) echo " invalid value" ;;
+    *)
+      if (( REPLY >= 1 && REPLY <= ${#options[@]} )); then
+        detp=$REPLY
+        echo
+        break
+      else
+        echo " invalid value"
+      fi
+      ;;
+  esac
+done
+
+
 
 echo -e "\n\n==== preparing =============================================\n"
 
@@ -125,11 +145,15 @@ echo -e "\n==== packages ==============================================\n"
 # viewnior mupdf flameshot
 # fossil remmina freerdp freerdp2
 
-pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs fcitx5-im fcitx5-mozc
-pacman -S --noconfirm --needed remmina freerdp gparted flameshot
-#sh -c 'pacman -S --noconfirm --needed nodejs npm; npm update -g npm'
+echo -e "\n== [BASE] =============\n"
+pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
+echo -e "\n== [IME] ==============\n"
+pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
+echo -e "\n== [RDP] ==============\n"
+pacman -S --noconfirm --needed remmina freerdp
 pacman --noconfirm -Scc
 
+echo -e "\n== [AUR] ==============\n"
 if [ $dstp -eq 2 ]; then
   #sudo -u "$SUDO_USER" pamac build --no-confirm microsoft-edge-stable-bin google-chrome visual-studio-code-bin
   sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
@@ -156,7 +180,7 @@ sudo -u "$SUDO_USER" fc-cache -fv
 # ==================================
 # /usr/share/icons/hicolor/00x00/apps/
 # 32 48 128
-echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+#echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
 
 mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/* /tmp/zxcv/
 #cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
