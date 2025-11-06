@@ -185,6 +185,7 @@ sudo -u "$SUDO_USER" fc-cache -fv
 # /usr/share/icons/hicolor/00x00/apps/
 # 32 48 128
 #echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
+#echo -e "XMODIFIERS=@im=fcitx5\nexport GTK_IM_MODULE=fcitx5\nexport QT_IM_MODULE=fcitx5\n" >> /etc/environment
 
 mkdir /tmp/zxcv; rsync -a ~/dots/files/fcitx5/* /tmp/zxcv/
 #cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
