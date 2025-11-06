@@ -67,13 +67,7 @@ sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 # ==== update DB
 pacman -Syy
 # ==== remove packages
-pacman -R -q --noconfirm vim
-pacman -R -q --noconfirm nano
-pacman -R -q --noconfirm micro
-pacman -R -q --noconfirm firefox
-pacman -R -q --noconfirm cachy-browser
-pacman -R -q --noconfirm falkon
-
+for pkg in vim nano micro firefox cachy-browser falkon; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
 
 echo -e "\n== [Artix] add Arch support \n"
 if [ $dstp -eq 4 ]; then
