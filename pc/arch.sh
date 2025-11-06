@@ -77,7 +77,8 @@ pacman -R --noconfirm falkon
 if [ $dstp -eq 4 ]; then
   pacman -S --noconfirm artix-archlinux-support
   cp /etc/pacman.conf /etc/pacman.conf.arch
-  echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n\ | sudo tee -a /etc/pacman.conf.arch
+  #echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
+  echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
   #echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
   pacman-key --populate archlinux
   #pacman --config /etc/pacman.conf.arch -Syy
@@ -132,7 +133,7 @@ source /etc/locale.conf
 
 echo -e "\n==== my dotfiles ===========================================\n"
 # ==== [normal user] get key files & dotfiles
-sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL -u wanner https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
+sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
 sudo -u "$SUDO_USER" git clone git@github.com:jwnr/dots.git
 # ==== [normal user] SSH
 sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
