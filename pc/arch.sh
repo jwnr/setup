@@ -148,7 +148,11 @@ echo -e "\n==== packages ==============================================\n"
 echo -e "\n== [BASE] =============\n"
 pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
 echo -e "\n== [IME] ==============\n"
-pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
+if [ $detp -eq 1 ]; then
+  pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc fcitx5-kde
+else
+  pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
+fi
 echo -e "\n== [RDP] ==============\n"
 pacman -S --noconfirm --needed remmina freerdp
 pacman --noconfirm -Scc
