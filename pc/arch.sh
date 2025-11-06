@@ -145,14 +145,10 @@ echo -e "\n==== packages ==============================================\n"
 # viewnior mupdf flameshot
 # fossil remmina freerdp freerdp2
 
-echo -e "\n== [BASE] =============\n"
+echo -e "== [BASE] =============\n"
 pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
 echo -e "\n== [IME] ==============\n"
-if [ $detp -eq 1 ]; then
-  pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc fcitx5-kde
-else
-  pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
-fi
+pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
 echo -e "\n== [RDP] ==============\n"
 pacman -S --noconfirm --needed remmina freerdp
 pacman --noconfirm -Scc
