@@ -16,7 +16,7 @@ read -p "username for getting key file : " husr
 read -s -p "password :" hpsw
 echo
 echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > /home/$SUDO_USER/.netrc
-chown $SUDO_USER:$SUDO_USER /home/$SUDO_USER/.netrc'
+chown $SUDO_USER:$SUDO_USER /home/$SUDO_USER/.netrc
 chmod 600 /home/$SUDO_USER/.netrc
 echo
 
