@@ -2,19 +2,20 @@
 
 
 if [ -z "$SUDO_USER" ]; then
-  echo -e '\n********************************************************'
+  echo -e '\n##########################################'
   echo "  error: run this script as 'sudo ./xx.sh'"
-  echo -e '********************************************************\n'
+  echo -e '##########################################\n'
   exit 1
 fi
 
 echo -e '\n********************************************************'
 echo -e ' + Do not pipe to "| sh", download and execute.'
-echo -e '********************************************************\n'
+echo -e '********************************************************'
 
 read -p "username for getting key file : " husr
 read -s -p "password :" hpsw
-sudo -u "$SUDO_USER" sh -c 'echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > ~/.netrc'
+echo
+sudo -u "$SUDO_USER" sh -c 'echo -e machine k.jwnr.net\\nlogin $husr\\npassword $hpsw > ~/.netrc'
 sudo -u "$SUDO_USER" sh -c 'chmod 600 ~/.netrc'
 echo
 
@@ -57,7 +58,7 @@ select opt in "${options[@]}"; do
 done
 
 
-echo -e "\n\n==== preparing =============================================\n"
+echo -e "==== preparing =============================================\n"
 # ==== pacman config
 sed -i -e 's/^.*VerbosePkgLists.*$/VerbosePkgLists/' /etc/pacman.conf
 sed -i -e 's/^.*ParallelDownloads.*$/ParallelDownloads = 5/' /etc/pacman.conf
@@ -66,16 +67,17 @@ sed -i -e 's/^.*ILoveCandy$/ILoveCandy/' /etc/pacman.conf
 # ==== update DB
 pacman -Syy
 # ==== remove packages
-pacman -R --noconfirm vim
-pacman -R --noconfirm nano
-pacman -R --noconfirm micro
-pacman -R --noconfirm firefox
-pacman -R --noconfirm cachy-browser
-pacman -R --noconfirm falkon
+pacman -R -q --noconfirm vim
+pacman -R -q --noconfirm nano
+pacman -R -q --noconfirm micro
+pacman -R -q --noconfirm firefox
+pacman -R -q --noconfirm cachy-browser
+pacman -R -q --noconfirm falkon
 
-# ==== [Artix] add Arch support
+
+echo -e "\n== [Artix] add Arch support \n"
 if [ $dstp -eq 4 ]; then
-  pacman -S --noconfirm artix-archlinux-support
+  pacman -S -q --noprogressbar --noconfirm artix-archlinux-support
   cp /etc/pacman.conf /etc/pacman.conf.arch
   #echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
   echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
