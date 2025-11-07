@@ -172,7 +172,7 @@ echo -e "\n==== install packages ==========\n================================"
 # fossil remmina freerdp freerdp2
 
 
-echo -e "== [SYSTEM] ===========\n"
+echo -e "\n== [SYSTEM] ==========="
 if [ $gpu -eq 1 ]; then
   pacman -S -q --noprogressbar --noconfirm linux-firmware-nvidia
 elif [ $gpu -eq 2 ]; then
@@ -183,16 +183,16 @@ else
   pacman -S -q --noprogressbar --noconfirm linux-firmware-intel
 fi
 
-echo -e "== [BASE] =============\n"
+echo -e "\n== [BASE] ============="
 # pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
 for pkg in vi rsync zip unzip unrar exfatprogs gparted flameshot; do pacman -S --noconfirm --needed "$pkg"; done
-echo -e "\n== [IME] ==============\n"
+echo -e "\n== [IME] =============="
 pacman -S --noconfirm --needed fcitx5-im fcitx5-mozc
-echo -e "\n== [RDP] ==============\n"
+echo -e "\n== [RDP] =============="
 pacman -S --noconfirm --needed remmina freerdp
 pacman --noconfirm -Scc
 
-echo -e "\n== [AUR] ==============\n"
+echo -e "\n== [AUR] =============="
 if [ $dstp -eq 2 ]; then
   # sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
   for pkg in brave-bin google-chrome visual-studio-code-bin; do pamac build --no-confirm "$pkg"; done
@@ -220,11 +220,11 @@ sudo -u "$SUDO_USER" fc-cache -fv
 # ==================================
 # -- icon
 # /usr/share/icons/hicolor/00x00/apps/   32 48 128
-#mkdir /tmp/zxcv; rsync -a /home/$SUDO_USER/dots/files/fcitx5/* /tmp/zxcv/
+mkdir /tmp/zxcv; rsync -a /home/$SUDO_USER/dots/files/fcitx5/* /tmp/zxcv/
 #cp -f /tmp/zxcv/icon/* /usr/share/icons/hicolor/32x32/apps/
-#cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
+cp -f /tmp/zxcv/icon48/* /usr/share/icons/hicolor/48x48/apps/
 #cp -f /tmp/zxcv/icon128/* /usr/share/icons/hicolor/128x128/apps/
-#rm -rf /tmp/zxcv
+rm -rf /tmp/zxcv
 # -- startup
 #echo -e "export XMODIFIERS=@im=fcitx\nexport GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\n" >> /etc/profile
 #echo -e "XMODIFIERS=@im=fcitx5\nexport GTK_IM_MODULE=fcitx5\nexport QT_IM_MODULE=fcitx5\n" >> /etc/environment
