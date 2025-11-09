@@ -77,6 +77,19 @@ select opt in "${options[@]}"; do
   esac
 done
 
+while true; do
+  read -r -p "install Bun ? : " devbun
+  if [[ "$devbun" == "y" || "$devbun" == "n" ]]; then
+    break
+  fi
+done
+
+while true; do
+  read -r -p "install 3D craft tools ? : " devthd
+  if [[ "$devthd" == "y" || "$devthd" == "n" ]]; then
+    break
+  fi
+done
 
 echo -e "==== preparing =================\n================================"
 # ==== pacman config
@@ -89,7 +102,7 @@ pacman -Syy
 
 # ==== remove packages
 echo -e "\n== remove packages (-Rns)"
-for pkg in vim nano micro firefox cachy-browser falkon vlc; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
+for pkg in vim nano micro firefox cachy-browser falkon; do pacman -Rns --unneeded --noprogressbar --noscriptlet --noconfirm "$pkg"; done
 pacman -Rdd --unneeded --noprogressbar --noscriptlet --noconfirm linux-firmware
 
 # ==== [Artix] add Arch support
@@ -117,18 +130,12 @@ else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
   fi
 
-  reflector --latest 8 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score
+  reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score
 
 fi
 
 echo -e "\n==== update packages (none AUR) \n================================"
-pacman -Syyu -q --noconfirm git
-
-
-#echo -e "\n==== locale, time ==============\n================================"
-# ==== locale, time
-#sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
-#source /etc/locale.conf
+pacman -Syyu -q --noprogressbar --noconfirm git
 
 
 echo -e "\n==== AUR install manager & update DB\n================================"
@@ -192,7 +199,7 @@ echo -e "\n== [RDP] =============="
 pacman -S --noconfirm --needed remmina freerdp
 pacman --noconfirm -Scc
 
-echo -e "\n== [AUR] =============="
+echo - e "\n== [AUR] =============="
 if [ $dstp -eq 2 ]; then
   # sudo -u "$SUDO_USER" pamac build --no-confirm brave-bin google-chrome visual-studio-code-bin
   for pkg in brave-bin google-chrome visual-studio-code-bin; do pamac build --no-confirm "$pkg"; done
@@ -205,10 +212,19 @@ fi
 #sudo -u "$SUDO_USER" paru -S --skipreview --sudoloop --noconfirm google-chrome microsoft-edge-stable-bin visual-studio-code-bin
 #sudo -u "$SUDO_USER" paru --noconfirm -Scc
 
+echo - e "\n== [DEV] =============="
+if [ "$devbun" -eq "y" ]; then
+  sudo -u "$SUDO_USER" sh -c 'curl -fsSL https://bun.com/install | bash; '
+  #sudo -u "$SUDO_USER" sh -c 'source /home/$SUDO_USER/.bash_profile'
+fi
+
+if [ "$devthd" -eq "y" ]; then
+  sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed bambustudio-bin'
+  sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed freecad-appimage'
+fi
 
 # ==== fonts
 # ==================================
-pacman --noconfirm -S otf-ipaexfont
 pacman --noconfirm -S noto-fonts-emoji
 ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
@@ -242,9 +258,14 @@ sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name 
 
 ## wallpaper
 sudo -u "$SUDO_USER" sh -c 'cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg'
-
 # ==================================
 
+
+# ==== Locale, Time
+# ==================================
+echo -e "\n==== Locale, Time ==============\n================================"
+sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
+source /etc/locale.conf
 
 
 
