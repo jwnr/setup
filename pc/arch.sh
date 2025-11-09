@@ -213,12 +213,12 @@ fi
 #sudo -u "$SUDO_USER" paru --noconfirm -Scc
 
 echo - e "\n== [DEV] =============="
-if [ "$devbun" -eq "y" ]; then
+if [[ $devbun == "y" ]]; then
   sudo -u "$SUDO_USER" sh -c 'curl -fsSL https://bun.com/install | bash; '
   #sudo -u "$SUDO_USER" sh -c 'source /home/$SUDO_USER/.bash_profile'
 fi
 
-if [ "$devthd" -eq "y" ]; then
+if [[ $devthd == "y" ]]; then
   sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed bambustudio-bin'
   sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed freecad-appimage'
 fi
