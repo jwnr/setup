@@ -13,12 +13,10 @@ chmod +x su.sh
 
 |  | npm |  | bun |  |
 |:-|:-|:-|:-|:-|
-| Astro       | npm create astro@latest      | [Astro](https://astro.build/)                   | bun create astro             | [Bun-Guide](https://bun.sh/guides/ecosystem/astro)     |
-| SvelteKit   | npx sv create xxx            | [SvelteKit](https://kit.svelte.dev/)            | bunx sv create xxx<br>bun create svelte@latest xxx | [Bun-Guide](https://bun.sh/guides/ecosystem/sveltekit) |
-| Next.js     | npx create-next-app@latest   | [Next.js](https://nextjs.org/)                  | bun create next-app          | [Bun-Guide](https://bun.sh/guides/ecosystem/nextjs)    |
-| hono        | npm create hono@latest xxx   | [Hono](https://hono.dev/getting-started/nodejs) | bun create hono xxx          | [Hono](https://hono.dev/getting-started/bun)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/hono)  |
-| Drizzle ORM |      | [Drizzle](https://orm.drizzle.team/) |      | [Drizzle](https://orm.drizzle.team/docs/get-started-sqlite#bun-sqlite)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/drizzle)  |
-| Prisma |      | [Prisma](https://www.prisma.io/) |      | [Prisma](https://www.prisma.io/docs/orm/tools/prisma-cli#bun)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/prisma)  |
+| SvelteKit   | npx sv create xxx            | [SvelteKit](https://svelte.dev/)                     | bunx sv create xxx      | [Bun-Guide](https://bun.sh/guides/ecosystem/sveltekit) |
+| hono        | npm create hono@latest xxx   | [Hono](https://hono.dev/docs/getting-started/nodejs) | bun create hono xxx     | [Hono](https://hono.dev/docs/getting-started/bun)<br>[Bun-Guide](https://bun.sh/docs/guides/ecosystem/hono)  |
+| Drizzle ORM |         | [Drizzle](https://orm.drizzle.team/)          |         | [Drizzle](https://orm.drizzle.team/docs/get-started-sqlite#bun-sqlite)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/drizzle)  |
+| Prisma      |         | [Prisma](https://www.prisma.io/)              |         | [Prisma](https://www.prisma.io/docs/orm/tools/prisma-cli#bun)<br>[Bun-Guide](https://bun.sh/guides/ecosystem/prisma)  |
 
 
 <br><br>
