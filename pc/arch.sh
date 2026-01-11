@@ -190,6 +190,14 @@ else
   pacman -S -q --noprogressbar --noconfirm linux-firmware-intel
 fi
 
+# [Artix] add NTP
+if [ $dstp -eq 4 ]; then
+  pacman -S -q --noprogressbar --noconfirm chrony chrony-dinit
+  dinitctl enable chronyd
+  dinitctl start chronyd
+fi
+
+
 echo -e "\n== [BASE] ============="
 # pacman -S --noconfirm --needed vi rsync zip unzip unrar exfatprogs gparted flameshot
 for pkg in vi rsync zip unzip unrar exfatprogs gparted flameshot; do pacman -S --noconfirm --needed "$pkg"; done
