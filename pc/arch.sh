@@ -106,15 +106,14 @@ for pkg in vim nano micro firefox cachy-browser falkon; do pacman -Rns --unneede
 pacman -Rdd --unneeded --noprogressbar --noscriptlet --noconfirm linux-firmware
 
 # ==== [Artix] add Arch support
+# pacman実行時「--config /etc/pacman.conf.arch」で有効
 echo -e "\n== add Arch support"
 if [ $dstp -eq 4 ]; then
   pacman -S -q --noprogressbar --noconfirm artix-archlinux-support
   cp /etc/pacman.conf /etc/pacman.conf.arch
-  #echo -e \\n\\n\# ---- Artix Arch Support ----\\n[extra]\\nInclude = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
   echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
-  #echo -e [community]\\n\Include = /etc/pacman.d/mirrorlist-arch\\n\\n | sudo tee -a /etc/pacman.conf.arch
+  #echo -e "\n[community]\n\Include = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
   pacman-key --populate archlinux
-  #pacman --config /etc/pacman.conf.arch -Syy
 fi
 
 echo -e "\n==== ranking mirrors ===========\n================================"
@@ -130,13 +129,16 @@ else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
   fi
 
-  reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score
+  reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
 
 fi
 
-echo -e "\n==== update packages (none AUR) \n================================"
-pacman -Syyu -q --noprogressbar --noconfirm git
-
+echo -e "\n==== update pkgs (none AUR) & install git \n================================"
+if [ $dstp -eq 4 ]; then
+  pacman --config /etc/pacman.conf.arch -Syyu -q --noprogressbar --noconfirm git
+else
+  pacman -Syyu -q --noprogressbar --noconfirm git
+fi
 
 echo -e "\n==== AUR install manager & update DB\n================================"
 if [ $dstp -eq 2 ]; then
@@ -272,6 +274,8 @@ sudo -u "$SUDO_USER" sh -c 'cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/w
 # ==== Locale, Time
 # ==================================
 echo -e "\n==== Locale, Time ==============\n================================"
+#echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
+#locale-gen
 sed -i -e 's/^.*LANG.*$/LANG=ja_JP.UTF-8/' /etc/locale.conf
 source /etc/locale.conf
 
@@ -292,4 +296,4 @@ echo -e " | Markdown editor  | Obsidian                                   |"
 echo -e " +------------------+--------------------------------------------+"
 echo -e "============================================================\n"
 
-# version 1.0.5
+# version 1.0.6
