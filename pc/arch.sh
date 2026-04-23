@@ -112,7 +112,7 @@ if [ $dstp -eq 4 ]; then
   pacman -S -q --noprogressbar --noconfirm artix-archlinux-support
   pacman-key --populate archlinux
   cp /etc/pacman.conf /etc/pacman.conf.arch
-  echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist-arch\n\" >> /etc/pacman.conf.arch
+  echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
 fi
 
 echo -e "\n==== ranking mirrors ===========\n================================"
