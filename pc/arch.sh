@@ -130,15 +130,10 @@ else
 
   reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
   # reflector --fasttrack 8 --api --proto https
-  
 fi
 
 echo -e "\n==== update pkgs (none AUR) & install git \n================================"
-if [ $dstp -eq 4 ]; then
-  pacman --config /etc/pacman.conf.arch -Syyu -q --noprogressbar --noconfirm git
-else
-  pacman -Syyu -q --noprogressbar --noconfirm git
-fi
+pacman -Syyu -q --noprogressbar --noconfirm git
 
 echo -e "\n==== AUR install manager & update DB\n================================"
 if [ $dstp -eq 2 ]; then
