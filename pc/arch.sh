@@ -236,6 +236,7 @@ fi
 # ==== fonts
 # ==================================
 pacman --noconfirm -S noto-fonts-emoji
+sudo -u "$SUDO_USER" yay -S --noconfirm ttf-hackgen
 ln -snf /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 ln -snf ../conf.avail/70-no-bitmaps.conf /usr/share/fontconfig/conf.default/
 sudo -u "$SUDO_USER" sh -c 'mkdir -p ~/.local/share; cp -rf ~/dots/files/fonts ~/.local/share/'
@@ -268,6 +269,10 @@ sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name 
 
 ## wallpaper
 sudo -u "$SUDO_USER" sh -c 'cp ~/dots/files/wp/wp_blackblock_uw.jpg ~/Pictures/wallpaper.jpg'
+
+## projects
+sudo -u "$SUDO_USER" sh -c 'mkdir -p ~/Projects; cp -R ~/dots/programs/_tunnel ~/Projects/'
+
 # ==================================
 
 
