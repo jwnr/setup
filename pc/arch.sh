@@ -110,10 +110,9 @@ pacman -Rdd --unneeded --noprogressbar --noscriptlet --noconfirm linux-firmware
 echo -e "\n== add Arch support"
 if [ $dstp -eq 4 ]; then
   pacman -S -q --noprogressbar --noconfirm artix-archlinux-support
-  cp /etc/pacman.conf /etc/pacman.conf.arch
-  echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
-  #echo -e "\n[community]\n\Include = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
   pacman-key --populate archlinux
+  cp /etc/pacman.conf /etc/pacman.conf.arch
+  echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist-arch\n\" >> /etc/pacman.conf.arch
 fi
 
 echo -e "\n==== ranking mirrors ===========\n================================"
@@ -124,13 +123,14 @@ if [ $dstp -eq 2 ]; then
 
 else
   if [ $dstp -eq 4 ]; then
-    pacman --config /etc/pacman.conf.arch -Sy -q --noprogressbar --noconfirm --needed reflector
+    pacman --config /etc/pacman.conf.arch -S -q --noprogressbar --noconfirm --needed reflector
   else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
   fi
 
   reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
-
+  # reflector --fasttrack 8 --api --proto https
+  
 fi
 
 echo -e "\n==== update pkgs (none AUR) & install git \n================================"
