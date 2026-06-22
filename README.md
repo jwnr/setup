@@ -1,4 +1,10 @@
-## PCセットアップ
+<div align="center" role="banner">
+セットアップ スクリプト集
+</div>div>
+
+<br>
+
+### PCセットアップ
 ```
 ## セットアップ
 curl -sL xxx.xxx > su.sh
@@ -9,7 +15,7 @@ chmod +x su.sh
 <br><br>
 
 
-## FWセットアップ
+### FWセットアップ
 
 |  | npm |  | bun |  |
 |:-|:-|:-|:-|:-|
@@ -22,7 +28,7 @@ chmod +x su.sh
 <br><br>
 
 
-## Bun workspaces (モノレポ)
+### Bun workspaces (モノレポ)
 ```
 #### ディレクトリ構造
 <root>
@@ -61,7 +67,7 @@ chmod +x su.sh
 <br><br>
 
 
-## Bun テスト
+### Bun テスト
 + jest に相当するのかな (jestから移行可能)
 + モック
   - スパイ
@@ -70,7 +76,7 @@ chmod +x su.sh
 + vite.config.ts で globals: true を書かなくても、 test,describe,expect 等の import が効く?
 
 
-## コマンド
+#### コマンド
 ```
 ## 基本
 bun test
@@ -93,7 +99,7 @@ bun test --coverage
 --rerun
 ```
 
-## コード
+#### コード
 ```
 ## describe
 関連するテストをグループ化
@@ -190,7 +196,7 @@ test.skip("asdfasdf", ()=>{...})
 <br><br>
 
 
-## Svelte, Sveltekit
+### Svelte, Sveltekit
 
 
 #### /src/app.html
@@ -221,7 +227,7 @@ test.skip("asdfasdf", ()=>{...})
 <br><br>
 
 
-## Bun + Sveltekit
+### Bun + Sveltekit
 
 > bun add -D svelte-adapter-bun
 
