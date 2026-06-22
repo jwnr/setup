@@ -1,8 +1,8 @@
 <div align="center" role="banner">
-セットアップ スクリプト集
+  <h3>セットアップ スクリプト集</h3>
 </div>
 
-<br>
+<br><br>
 
 ### PCセットアップ
 ```
