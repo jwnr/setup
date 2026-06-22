@@ -1,6 +1,6 @@
 <div align="center" role="banner">
 セットアップ スクリプト集
-</div>div>
+</div>
 
 <br>
 
