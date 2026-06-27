@@ -4,13 +4,13 @@
 
 
 
-|             | AUR       | rank mirrors    |    |
-|-------------+-------+--------------+----|
-| CachyOS     |    |    |    |
-| EndeavourOS |    |    |    |
-| Manjaro     |    |    |    |
-| Omarchy     |    |    |    |
-| Artix       | x -> yay  | x -> reflector  |    |
+|             | AUR       | rank mirrors    |
+|-------------+-----------+-----------------+
+| CachyOS     |           |                 |
+| EndeavourOS |           |                 |
+| Manjaro     |           |                 |
+| Omarchy     |           |                 |
+| Artix       | x -> yay  | x -> reflector  |
 
 
 
