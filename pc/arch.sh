@@ -14,10 +14,6 @@ echo -e '********************************************************'
 read -p "username for getting key file : " husr
 read -s -p "password :" hpsw
 echo
-echo -e "machine k.jwnr.net\nlogin $husr\npassword $hpsw" > /home/$SUDO_USER/.netrc
-chown $SUDO_USER:$SUDO_USER /home/$SUDO_USER/.netrc
-chmod 600 /home/$SUDO_USER/.netrc
-echo
 
 PS3="Select dist (q=quit): "
 options=("EndeavourOS" "Manjaro, Mabox" "CachyOS" "Artix")
@@ -122,18 +118,18 @@ if [ $dstp -eq 2 ]; then
   # pacman-mirrors --fasttrack 8 --api --proto https
 
 else
-  if [ $dstp -eq 4 ]; then
-    pacman --config /etc/pacman.conf.arch -S -q --noprogressbar --noconfirm --needed reflector
-  else
+  #if [ $dstp -eq 4 ]; then
+    # pacman --config /etc/pacman.conf.arch -S -q --noprogressbar --noconfirm --needed reflector
+  #else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
-  fi
+  #fi
 
-  reflector --latest 12 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
-  # reflector --fasttrack 8 --api --proto https
+  reflector --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist
+  reflector --fasttrack 8 --api --proto https --save /etc/pacman.d/mirrorlist
 fi
 
 echo -e "\n==== update pkgs (none AUR) & install git \n================================"
-pacman -Syyu -q --noprogressbar --noconfirm git
+pacman -Syyu -q --noprogressbar --noconfirm git sshpass
 
 echo -e "\n==== AUR install manager & update DB\n================================"
 if [ $dstp -eq 2 ]; then
@@ -157,8 +153,10 @@ fi
 
 echo -e "\n==== my dotfiles ===============\n================================"
 # ==== [normal user] get key files & dotfiles
-sudo -u "$SUDO_USER" sh -c 'cd ~; curl -n -kOL https://k.jwnr.net/ssh.tgz; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
-sudo -u "$SUDO_USER" sh -c 'rm -f ~/.netrc'
+#export SSHPASS="${hpsw}"
+#sshpass -e sftp -o StrictHostKeyChecking=no -P 57031 "${husr}@k.jwnr.net:ssh.tgz" .
+sudo -u "$SUDO_USER" env SSHPASS="${hpsw}" sshpass -e sftp -P 57031 -o StrictHostKeyChecking=no "${husr}@k.jwnr.net:ssh.tgz" "/home/${SUDO_USER}/"
+sudo -u "$SUDO_USER" sh -c 'cd ~; tar xf ssh.tgz; rm -f ssh.tgz; chmod -R 400 .ssh/*'
 sudo -u "$SUDO_USER" sh -c 'git clone git@github.com:jwnr/dots.git'
 # ==== [normal user] SSH
 sudo -u "$SUDO_USER" sh -c 'rm -f ~/.ssh/*; ln -snf ~/dots/dir/.ssh/config ~/.ssh/config; chmod 400 ~/dots/dir/.ssh/*/*'
