@@ -125,10 +125,10 @@ else
   #fi
 
   reflector --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist
-  reflector --fasttrack 8 --api --proto https --save /etc/pacman.d/mirrorlist
+  #reflector --fasttrack 8 --api --proto https --save /etc/pacman.d/mirrorlist
 fi
 
-echo -e "\n==== update pkgs (none AUR) & install git \n================================"
+echo -e "\n==== update pkgs (none AUR) & install git, sshpass \n================================"
 pacman -Syyu -q --noprogressbar --noconfirm git sshpass
 
 echo -e "\n==== AUR install manager & update DB\n================================"
@@ -255,7 +255,7 @@ sudo -u "$SUDO_USER" sh -c 'rsync -a ~/dots/dir/.config/mozc/* ~/.config/mozc/'
 # ==== other setting
 # ==================================
 ## hosts customize for Edge
-echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts
+#echo -e \\n127.0.0.1 browser.events.data.msn.com\\n127.0.0.1 c.msn.com\\n127.0.0.1 sb.scorecardresearch.com\\n >> /etc/hosts
 
 ## GitHub
 sudo -u "$SUDO_USER" sh -c 'echo -e "[user]\n  email = 187tch@gmail.com\n  name  = wanner" >> ~/.gitconfig'
@@ -286,12 +286,12 @@ echo -e " + prepare font (install IPAex, disable bitmap font)"
 echo -e " + remove package"
 echo -e " + install packages"
 echo -e " + install packages (AUR)"
-echo -e " + block some URL by adding hosts (for Edge)"
-echo -e " +------------------+--------------------------------------------+"
-echo -e " | screen recorder  | Vokoscreen                                 |"
-echo -e " | video editor     | Shotcut                                    |"
-echo -e " | Markdown editor  | Obsidian                                   |"
-echo -e " +------------------+--------------------------------------------+"
+#echo -e " + block some URL by adding hosts (for Edge)"
+#echo -e " +------------------+--------------------------------------------+"
+#echo -e " | screen recorder  | Vokoscreen                                 |"
+#echo -e " | video editor     | Shotcut                                    |"
+#echo -e " | Markdown editor  | Obsidian                                   |"
+#echo -e " +------------------+--------------------------------------------+"
 echo -e "============================================================\n"
 
 # version 1.0.6
