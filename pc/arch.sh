@@ -185,11 +185,13 @@ else
   pacman -S -q --noprogressbar --noconfirm linux-firmware-intel
 fi
 
-# [Artix] add NTP
+# [Artix] add NTP, PowerProfile
 if [ $dstp -eq 4 ]; then
-  pacman -S -q --noprogressbar --noconfirm chrony chrony-dinit
+  pacman -S -q --noprogressbar --noconfirm chrony chrony-dinit power-profiles-daemon-dinit
   dinitctl enable chronyd
   dinitctl start chronyd
+  dinitctl enable power-profiles-daemon
+  dinitctl start power-profiles-daemon
 fi
 
 
