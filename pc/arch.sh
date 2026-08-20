@@ -109,6 +109,7 @@ if [ $dstp -eq 4 ]; then
   pacman-key --populate archlinux
   cp /etc/pacman.conf /etc/pacman.conf.arch
   echo -e "\n\n# ---- Artix Arch Support ----\n[extra]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n[multilib]\nInclude = /etc/pacman.d/mirrorlist-arch\n\n" >> /etc/pacman.conf.arch
+  pacman-key --config /etc/pacman.conf.arch --populate archlinux
 fi
 
 echo -e "\n==== ranking mirrors ===========\n================================"
@@ -124,8 +125,10 @@ else
     pacman -S -q --noprogressbar --noconfirm --needed reflector
   #fi
 
+  # Artix用
   reflector --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist
-  #reflector --fasttrack 8 --api --proto https --save /etc/pacman.d/mirrorlist
+  # Arch用
+  reflector --url 'https://archlinux.org/mirrors/status/json/' --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
 fi
 
 echo -e "\n==== update pkgs (none AUR) & install git, sshpass \n================================"
