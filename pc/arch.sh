@@ -228,8 +228,10 @@ if [[ $devbun == "y" ]]; then
 fi
 
 if [[ $devthd == "y" ]]; then
+  pacman -Sy --config /etc/pacman.conf.arch
+  pacman -S --config /etc/pacman.conf.arch freecad
+  #sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed freecad-appimage'
   sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed bambustudio-bin'
-  sudo -u "$SUDO_USER" sh -c 'yay -S --noconfirm --needed freecad-appimage'
 fi
 
 # ==== fonts
