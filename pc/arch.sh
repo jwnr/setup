@@ -123,11 +123,11 @@ if [ $dstp -eq 2 ]; then
 
 else
   pacman -S -q --noprogressbar --noconfirm --needed reflector
-  reflector --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist
+  reflector --latest 16 --age 24 -c JP,TW --protocol https --sort score --save /etc/pacman.d/mirrorlist
 
   # Artix は Arch本家 をわけてるから
   if [ $dstp -eq 4 ]; then
-    reflector --url 'https://archlinux.org/mirrors/status/json/' --latest 16 --age 24 -c JP,US,AU,IN --protocol https,rsync --sort score --save /etc/pacman.d/mirrorlist-arch
+    reflector --url 'https://archlinux.org/mirrors/status/json/' --latest 16 --age 24 -c JP,TW --protocol https --sort score --save /etc/pacman.d/mirrorlist-arch
   fi
 
 fi
